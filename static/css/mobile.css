@@ -1,0 +1,379 @@
+/* --- Mobile Adaptation (Max Width 768px) --- */
+@media (max-width: 768px) {
+
+    /* =========================================
+       1. CORE LAYOUT & RESET
+       ========================================= */
+
+    body {
+        /* Убираем лишние отступы, так как навигация теперь плавает */
+        overflow-x: hidden;
+    }
+
+    .main-content {
+        margin-left: 0;
+        width: 100%;
+        /* Добавляем нижний отступ, чтобы контент не перекрывался плавающим меню */
+        padding: 24px 16px 120px 16px;
+    }
+
+    /* =========================================
+       2. NAVIGATION: RAIL -> FLOATING ISLAND
+       ========================================= */
+
+
+    .nav-rail {
+        /* 1. СБРОС ГЕОМЕТРИИ (Reset Desktop) */
+        position: fixed;
+        top: auto !important;    /* Отменяем прилипание к верху */
+        height: auto !important; /* Отменяем высоту во весь экран */
+        width: 100% !important;  /* Растягиваем контейнер на всю ширину */
+
+        /* 2. НОВОЕ ПОЗИЦИОНИРОВАНИЕ */
+        left: 0;
+        bottom: 0;
+        padding: 0 16px 24px 16px; /* 24px отступ снизу задаем паддингом */
+
+        display: flex;
+        justify-content: center; /* Центрируем капсулу */
+        align-items: flex-end;
+        pointer-events: none;    /* Пропускаем клики мимо области вокруг */
+        z-index: 1000;
+    }
+
+    .nav-container {
+        pointer-events: auto; /* Включаем клики */
+
+        /* Размеры */
+        width: 100%;
+        max-width: 380px;
+        height: 64px;
+
+        /* Внешний вид (БЕЗ СТЕКЛА, СПЛОШНОЙ) */
+        background-color: #2b2930; /* Темно-серый сплошной */
+        backdrop-filter: none;
+        border-radius: 32px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5); /* Плотная тень */
+
+        /* Выравнивание внутри */
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between; /* Распределяем: FAB слева, иконки справа */
+        padding: 0 12px;
+        gap: 0;
+    }
+
+    /* Группа иконок (справа) */
+    .nav-group {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: flex-end;
+        gap: 4px; /* Расстояние между иконками */
+        width: auto;
+        flex-grow: 1; /* Занимает оставшееся место */
+    }
+
+    /* Иконки */
+    .nav-item {
+        width: 48px;
+        height: 48px;
+        border-radius: 50%;
+        margin: 0;
+        flex-shrink: 0; /* ЗАПРЕТ СПЛЮЩИВАНИЯ */
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .nav-item .label { display: none !important; }
+    .nav-item::before { display: none; } /* Убираем фон десктопа */
+
+    .nav-item .icon {
+        font-size: 26px;
+        margin: 0;
+        color: var(--md-sys-color-on-surface-variant);
+    }
+
+    .nav-item.active .icon {
+        color: var(--md-sys-color-primary); /* Подсветка активной */
+    }
+
+    /* =========================================
+       3. FAB SPEED DIAL
+       ========================================= */
+
+    /* Обертка кнопки (Встает первой визуально) */
+    .fab-wrapper {
+        order: -1; /* Ставим слева */
+        margin-right: auto; /* Отодвигаем группу иконок вправо */
+        margin-left: 0;
+        position: relative;
+    }
+
+    .nav-fab {
+        width: 48px;
+        height: 48px;
+        border-radius: 16px; /* Squircle */
+        background-color: var(--md-sys-color-primary-container);
+        color: var(--md-sys-color-on-primary-container);
+        box-shadow: none;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transform: none !important;
+    }
+
+    /* Выпадающее меню (вверх) */
+    .fab-options {
+        bottom: 25px; /* Над баром */
+        left: 0;
+        right: auto;
+        top: auto;
+        margin-left: 0;
+        align-items: flex-start; /* Текст слева */
+        position: absolute;
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+
+        margin: 0;
+        padding: 0;
+
+        z-index: 2000;
+    }
+
+    .fab-pill {
+        transform: translateY(10px) scale(0.9);
+        background-color: var(--md-sys-color-surface-container-high);
+        color: var(--md-sys-color-on-surface);
+        border: 1px solid var(--md-sys-color-outline-variant);
+    }
+
+    .fab-wrapper.is-open .fab-pill {
+        transform: translateY(0) scale(1);
+    }
+
+    .fab-pill {
+        /* Анимация снизу вверх */
+        transform: translateY(20px) scale(0.9);
+        box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+    }
+
+    /* Переопределение анимации открытия */
+    .fab-wrapper.is-open .fab-pill {
+        transform: translateY(0) scale(1);
+    }
+
+    /* =========================================
+       4. LIBRARY PAGE
+       ========================================= */
+
+    /* Header Typography */
+    .library-header { margin-bottom: 32px; }
+
+    .display-medium {
+        font-size: 34px; /* Уменьшаем гигантский заголовок */
+        line-height: 1.1;
+        margin-bottom: 12px;
+    }
+
+    .header-badges { flex-wrap: wrap; }
+
+    /* Controls Bar */
+    .library-controls {
+        position: static; /* Убираем липкость, она съедает место на мобильном */
+        padding: 0 0 24px 0;
+        gap: 12px;
+        background: transparent; /* Убираем фон */
+        margin-top: 0;
+    }
+
+    .library-controls::before { display: none; } /* Убираем блюр подложку */
+
+    .search-container {
+        min-width: 100%; /* Поиск на всю ширину */
+        height: 52px;
+    }
+
+    .controls-right {
+        width: 100%;
+        justify-content: space-between; /* Распределяем сортировку и вид по краям */
+    }
+
+    .select-wrapper { flex-grow: 1; margin-right: 12px; }
+
+    /* Grid Layout */
+    .cards-grid {
+        /* 2 колонки на большинстве телефонов, gap меньше */
+        grid-template-columns: repeat(2, 1fr);
+        gap: 12px;
+        margin-bottom: 80px;
+    }
+
+    /* Адаптация карточек */
+    .game-card {
+        border-radius: 16px;
+    }
+
+    .card-content {
+        padding: 12px;
+        gap: 8px;
+    }
+
+    .game-title {
+        font-size: 14px;
+        -webkit-line-clamp: 3; /* Разрешаем 3 строки, так как карточки узкие */
+    }
+
+    .status-chip {
+        height: 24px;
+        font-size: 10px;
+        padding: 0 8px 0 4px;
+    }
+    .chip-icon { font-size: 14px !important; }
+
+    .edit-fab {
+        width: 36px; height: 36px; /* Меньше кнопка редактирования */
+        top: 8px; right: 8px;
+    }
+
+    /* Для очень маленьких экранов (iPhone SE и т.д.) - 1 колонка */
+    @media (max-width: 380px) {
+        .cards-grid { grid-template-columns: 1fr; }
+        .card-media { aspect-ratio: 16/9; }
+    }
+
+    /* =========================================
+       5. JOURNEY (DASHBOARD & RAILS)
+       ========================================= */
+
+    /* Dashboard: Вертикальный стек */
+    .dashboard-grid {
+        grid-template-columns: 1fr; /* Одна колонка */
+        gap: 16px;
+        margin-bottom: 40px;
+    }
+
+    .stat-card {
+        height: 120px; /* Более компактные карточки статистики */
+        padding: 20px;
+    }
+
+    .stat-value { font-size: 48px; }
+    .stat-icon { font-size: 64px; opacity: 0.15; }
+
+    /* Rails */
+    .rails-layout { gap: 24px; }
+
+    .franchise-rail-card {
+        padding: 16px;
+        border-radius: 24px;
+        gap: 16px;
+    }
+
+    .rail-header {
+        /* Чуть уменьшаем отступы в заголовке рельсы */
+        margin-bottom: 4px;
+    }
+
+    .headline-small { font-size: 20px; }
+
+    .game-bubble {
+        width: 100px; height: 100px; /* Делаем пузыри крупнее и квадратнее/круглее */
+        border-radius: 50%; /* Превращаем в круги (Story style) */
+    }
+
+    .game-bubble img { border-radius: 50%; }
+
+    .game-bubble-wrapper { width: 100px; } /* Подгоняем обертку */
+
+    .status-badge-icon {
+        bottom: 0; right: 0;
+        width: 28px; height: 28px;
+    }
+
+    /* =========================================
+       6. DIALOGS (MODALS)
+       ========================================= */
+
+    dialog.m3-dialog {
+        width: 95vw;          /* Почти вся ширина */
+        max-width: 100%;
+        max-height: 85vh;     /* Оставляем место снизу для навигации */
+        margin-bottom: 90px;  /* Поднимаем над нав-баром */
+        border-radius: 24px;
+        overflow-y: auto;     /* Скролл внутри диалога */
+    }
+
+    .split-layout {
+        grid-template-columns: 1fr; /* Одна колонка */
+        gap: 16px;
+        padding: 0 16px;
+    }
+
+    /* Preview Image */
+    .preview-column {
+        order: -1; /* Картинка сверху */
+    }
+
+    .image-preview-container {
+        height: 180px; /* Фиксированная высота */
+        width: 100%;
+        border-radius: 16px;
+    }
+
+    /* Inputs */
+    .dialog-header { padding: 20px 16px 12px; }
+    .headline-small { font-size: 22px; }
+
+    .inputs-column { gap: 12px; }
+    .m3-field { height: 52px; } /* Чуть компактнее поля */
+
+    .row-group {
+        flex-direction: row; /* Оставляем в строку, если влезают (дата/статус) */
+    }
+
+    /* Footer Actions */
+    .dialog-actions {
+        padding: 16px;
+        background-color: var(--md-sys-color-surface-container-high);
+        position: sticky;
+        bottom: 0;
+        z-index: 10;
+        border-top: 1px solid var(--md-sys-color-outline-variant);
+    }
+
+    .btn-filled { width: 100%; justify-content: center; } /* Кнопка "Save" на всю ширину */
+
+    /* =========================================
+       FIX: GROUP HEADER (Long Titles)
+       ========================================= */
+
+    .group-header {
+        max-width: 100%;
+        padding-right: 8px;
+    }
+
+    .group-header .title-large {
+        flex: 1;
+        min-width: 0;
+
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+
+        margin-right: 12px;
+    }
+
+
+    .group-header .divider {
+        display: none;
+    }
+
+    .group-header .count-badge {
+        flex-shrink: 0;
+        margin-left: 0;
+    }
+}

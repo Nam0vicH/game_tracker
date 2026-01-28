@@ -1,0 +1,317 @@
+{% extends "base.html" %}
+
+{% block page_css %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/library.css') }}">
+    <style>
+        .franchise-group {
+            /* Браузер не будет отрисовывать контент, пока он не попадет во viewport.
+               Это колоссально снижает нагрузку при загрузке страницы. */
+            content-visibility: auto;
+            /* Примерная высота блока, чтобы скроллбар не прыгал (заголовок + 1 ряд карточек) */
+            contain-intrinsic-size: 1px 300px;
+        }
+
+        .franchise-group .cards-grid-wrapper {
+            display: grid;
+            grid-template-rows: 1fr;
+            /* will-change подсказывает браузеру подготовить GPU */
+            will-change: grid-template-rows;
+            transition: grid-template-rows 0.3s var(--motion-spring-slow);
+        }
+
+        .franchise-group.is-collapsed .cards-grid-wrapper {
+            grid-template-rows: 0fr;
+        }
+
+        .franchise-group .cards-grid {
+            overflow: hidden;
+            min-height: 0;
+        }
+
+        .franchise-group.is-collapsed .divider {
+            opacity: 0.5;
+        }
+
+        /* Класс для скрытия битых картинок (добавляется через JS/onerror) */
+        .card-media.image-error img {
+            display: none;
+        }
+        .card-media.image-error .no-image-pattern {
+            display: block !important; /* Принудительно показываем паттерн */
+        }
+
+        /* Скрываем паттерн по умолчанию, если есть картинка */
+        .card-media img + .no-image-pattern {
+            display: none;
+        }
+    </style>
+{% endblock %}
+
+{% block content %}
+    <header class="library-header">
+        <div class="header-top">
+            <h1 class="display-medium">Библиотека</h1>
+            <div class="header-badges">
+                <span class="badge-pill primary">{{ stats.playing }} Активных</span>
+                <span class="badge-pill surface">{{ stats.total }} Всего</span>
+            </div>
+        </div>
+
+        <!-- ПАНЕЛЬ УПРАВЛЕНИЯ -->
+        <div class="library-controls">
+            <!-- Поиск -->
+            <div class="search-container">
+                <span class="material-symbols-rounded search-icon">search</span>
+                <input type="text" id="librarySearch" placeholder="Поиск игры, серии или жанра..." autocomplete="off">
+            </div>
+
+            <div class="controls-right">
+                <button class="icon-btn-outlined" id="toggleAllBtn" title="Свернуть/Развернуть все">
+                    <span class="material-symbols-rounded">unfold_less</span>
+                </button>
+
+                <div class="select-wrapper">
+                    <select id="sortSelect">
+                        <option value="default">По умолчанию</option>
+                        <option value="name">Название (А-Я)</option>
+                        <option value="rating">Рейтинг (Сначала высокие)</option>
+                        <option value="status">Статус</option>
+                    </select>
+                    <span class="material-symbols-rounded arrow">sort</span>
+                </div>
+
+                <div class="segmented-btn-group">
+                    <button class="view-btn active" data-view="grid" title="Сетка">
+                        <span class="material-symbols-rounded">grid_view</span>
+                    </button>
+                    <button class="view-btn" data-view="list" title="Список">
+                        <span class="material-symbols-rounded">view_list</span>
+                    </button>
+                    <button class="view-btn" data-view="compact" title="Компактно">
+                        <span class="material-symbols-rounded">apps</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="feed-layout" id="libraryFeed">
+
+        {% macro render_section(title, games_list, count, is_franchise=True) %}
+        <section class="franchise-group" data-franchise-name="{{ title }}">
+
+            <div class="group-header" onclick="toggleSection(this)">
+                <button class="icon-btn-text toggle-icon" aria-label="Toggle section">
+                    <span class="material-symbols-rounded">expand_more</span>
+                </button>
+                <h2 class="title-large">{{ title }}</h2>
+                <div class="divider"></div>
+                {% if count %}
+                    <span class="badge-pill surface micro">{{ count }}</span>
+                {% endif %}
+            </div>
+
+            <div class="cards-grid-wrapper">
+                <div class="cards-grid view-grid">
+                    {% for game in games_list %}
+                        {% set clean_title = game.title %}
+                        {% if is_franchise %}
+                            {% set clean_title = game.title.replace(title, '').strip(': ').strip() %}
+                            {% if clean_title|length < 2 %}{% set clean_title = game.title %}{% endif %}
+                        {% endif %}
+
+                        <article class="game-card status-{{ game.status }}"
+                                 data-title="{{ game.title }}"
+                                 data-rating="{{ game.rating }}"
+                                 data-status="{{ game.status }}">
+
+                            <!-- Медиа блок -->
+                            <div class="card-media">
+                                {% if game.thumbnail %}
+                                    <img src="{{ game.thumbnail }}"
+                                         alt="{{ game.title }}"
+                                         loading="lazy"
+                                         decoding="async"
+                                         onerror="this.parentElement.classList.add('image-error')">
+
+                                    <!-- Заглушка (скрыта CSS-ом, пока картинка жива) -->
+                                    <div class="no-image-pattern"></div>
+                                {% else %}
+                                    <div class="no-image-pattern"></div>
+                                {% endif %}
+
+                                <div class="genre-badge">{{ game.genre }}</div>
+
+                                {% if game.rating > 0 %}
+                                <div class="rating-badge">
+                                    <span class="material-symbols-rounded icon">star</span>
+                                    <span>{{ game.rating }}</span>
+                                </div>
+                                {% endif %}
+
+                                <div class="hover-overlay">
+                                    <button class="edit-fab"
+                                            aria-label="Edit {{ game.title }}"
+                                            data-title="{{ game.title }}"
+                                            data-status="{{ game.status }}"
+                                            data-rating="{{ game.rating }}"
+                                            data-platform="{{ game.platform }}"
+                                            data-image="{{ game.thumbnail }}"
+                                            data-genre="{{ game.genre }}"
+                                            data-franchise="{{ title if is_franchise else '' }}">
+                                        <span class="material-symbols-rounded">edit</span>
+                                    </button>
+                                </div>
+                            </div>
+
+                            <div class="card-content">
+                                <h3 class="game-title" title="{{ game.title }}">{{ clean_title }}</h3>
+
+                                <div class="card-footer">
+                                    <div class="platform-icon" title="{{ game.platform }}">
+                                        {% if game.platform == 'PC' %}<span class="material-symbols-rounded">computer</span>
+                                        {% elif 'PlayStation' in game.platform %}<span class="material-symbols-rounded">sports_esports</span>
+                                        {% elif 'Xbox' in game.platform %}<span class="material-symbols-rounded">videogame_asset</span>
+                                        {% else %}<span class="material-symbols-rounded">gamepad</span>{% endif %}
+                                    </div>
+
+                                    <div class="status-chip chip-{{ game.status }}">
+                                        {% if game.status == 'completed' %}
+                                            <span class="material-symbols-rounded chip-icon">check</span><span>Прошел</span>
+                                        {% elif game.status == 'playing' %}
+                                            <span class="material-symbols-rounded chip-icon">stadia_controller</span><span>Играю</span>
+                                        {% elif game.status == 'on_hold' %}
+                                            <span class="material-symbols-rounded chip-icon">pause</span><span>Пауза</span>
+                                        {% elif game.status == 'dropped' %}
+                                            <span class="material-symbols-rounded chip-icon">close</span><span>Бросил</span>
+                                        {% else %}
+                                            <span class="material-symbols-rounded chip-icon">bookmark</span><span>В планах</span>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            </div>
+                        </article>
+                    {% endfor %}
+                </div>
+            </div>
+        </section>
+        {% endmacro %}
+
+        {# --- RENDER LOOPS --- #}
+        {% for franchise, f_data in data.franchises.items() %}
+            {{ render_section(franchise, f_data.games, f_data.total_count, True) }}
+        {% endfor %}
+
+        {% if data.singles %}
+            {{ render_section('Одиночные игры', data.singles, data.singles|length, False) }}
+        {% endif %}
+
+    </div>
+
+    <!-- Edit Dialog (Optimized: hidden by default is standard) -->
+    <dialog id="editDialog" class="m3-dialog">
+        <form method="dialog" class="dialog-form" id="editForm">
+            <div class="dialog-header">
+                <h2 class="headline-small">Редактировать игру</h2>
+                <p class="body-medium text-variant">Обновите данные коллекции</p>
+            </div>
+            <div class="dialog-body split-layout">
+                <div class="inputs-column">
+                    <div class="m3-field filled" id="franchiseSelectWrapper" style="display: none;">
+                        <select id="inputFranchise" name="franchise">
+                            <option value="">— Отдельная игра —</option>
+                            {% for franchise_name in data.franchises.keys() %}
+                            <option value="{{ franchise_name }}">{{ franchise_name }}</option>
+                            {% endfor %}
+                        </select>
+                        <label for="inputFranchise">Добавить во франшизу</label>
+                        <span class="material-symbols-rounded dropdown-icon">arrow_drop_down</span>
+                    </div>
+                    <div class="m3-field filled">
+                        <input type="text" id="inputTitle" name="title" placeholder=" " required>
+                        <label for="inputTitle">Название игры</label>
+                    </div>
+                    <div class="m3-field filled">
+                        <input type="url" id="inputImage" name="image" placeholder=" ">
+                        <label for="inputImage">URL изображения</label>
+                    </div>
+                    <div class="row-group">
+                        <div class="m3-field filled">
+                            <select id="inputStatus" name="status">
+                                <option value="playing">Играю</option>
+                                <option value="completed">Пройдено</option>
+                                <option value="on_hold">На паузе</option>
+                                <option value="dropped">Брошено</option>
+                                <option value="not_started">В планах</option>
+                            </select>
+                            <label for="inputStatus">Статус</label>
+                            <span class="material-symbols-rounded dropdown-icon">arrow_drop_down</span>
+                        </div>
+                        <div class="m3-field filled">
+                            <input type="number" id="inputRating" name="rating" min="0" max="10" step="0.1" placeholder=" ">
+                            <label for="inputRating">Рейтинг</label>
+                        </div>
+                    </div>
+                    <div class="row-group">
+                        <div class="m3-field filled">
+                            <select id="inputPlatform" name="platform">
+                                <option value="PC">PC</option>
+                                <option value="PlayStation">PlayStation</option>
+                                <option value="Xbox">Xbox</option>
+                                <option value="Nintendo">Nintendo</option>
+                            </select>
+                            <label for="inputPlatform">Платформа</label>
+                            <span class="material-symbols-rounded dropdown-icon">arrow_drop_down</span>
+                        </div>
+                        <div class="m3-field filled">
+                            <input type="text" id="inputGenre" name="genre" placeholder=" " value="Unknown">
+                            <label for="inputGenre">Жанр</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="preview-column">
+                    <div class="image-preview-container">
+                        <img id="previewImage" src="" alt="Game Preview">
+                        <div class="preview-placeholder">
+                            <span class="material-symbols-rounded">image</span>
+                            <span>Превью</span>
+                        </div>
+                    </div>
+                    <div class="preview-caption">Предпросмотр</div>
+                </div>
+            </div>
+            <div class="dialog-actions">
+                <button type="button" class="btn-text" id="cancelBtn">Отмена</button>
+                <button type="submit" class="btn-filled" id="saveBtn">Сохранить</button>
+            </div>
+        </form>
+    </dialog>
+
+    <dialog id="franchiseDialog" class="m3-dialog">
+        <form method="dialog" class="dialog-form" id="franchiseForm">
+            <div class="dialog-header">
+                <h2 class="headline-small">Добавить франшизу</h2>
+                <p class="body-medium text-variant">Создать новую серию игр</p>
+            </div>
+            <div class="dialog-body">
+                <div class="m3-field filled">
+                    <input type="text" id="inputFranchiseName" name="name" placeholder=" " required>
+                    <label for="inputFranchiseName">Название франшизы</label>
+                </div>
+                <div class="m3-field filled">
+                    <input type="number" id="inputTotalCount" name="total_count" min="1" value="1" placeholder=" ">
+                    <label for="inputTotalCount">Всего игр в серии</label>
+                </div>
+            </div>
+            <div class="dialog-actions">
+                <button type="button" class="btn-text" id="cancelFranchiseBtn">Отмена</button>
+                <button type="submit" class="btn-filled" id="saveFranchiseBtn">Создать</button>
+            </div>
+        </form>
+    </dialog>
+
+{% endblock %}
+
+{% block page_js %}
+    <script src="{{ url_for('static', filename='js/library.js') }}" defer></script>
+{% endblock %}

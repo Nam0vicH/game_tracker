@@ -1,0 +1,829 @@
+/* --- Header --- */
+.library-header {
+    margin-bottom: 48px;
+}
+
+.display-medium {
+    font-family: 'Roboto Flex', sans-serif;
+    font-size: 45px;
+    font-weight: 400; /* Regular weight typical of M3 Headers */
+    color: var(--md-sys-color-on-surface);
+    margin-bottom: 16px;
+}
+
+.header-badges {
+    display: flex;
+    gap: 12px;
+}
+
+.badge-pill {
+    padding: 6px 16px;
+    border-radius: 50px;
+    font-size: 14px;
+    font-weight: 500;
+}
+.badge-pill.primary {
+    background: var(--md-sys-color-primary-container);
+    color: var(--md-sys-color-on-primary-container);
+}
+.badge-pill.surface {
+    border: 1px solid var(--md-sys-color-outline);
+    color: var(--md-sys-color-on-surface-variant);
+}
+
+/* --- Layout --- */
+.group-header {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 24px;
+    margin-top: 16px;
+}
+
+.title-large {
+    font-size: 22px;
+    font-weight: 500;
+    color: var(--md-sys-color-on-surface);
+    white-space: nowrap;
+}
+
+.divider {
+    height: 1px;
+    width: 100%;
+    background: linear-gradient(90deg, var(--md-sys-color-surface-container-highest), transparent);
+}
+
+.cards-grid {
+    display: grid;
+    /* Адаптивная сетка: минимум 240px, максимум 300px */
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 24px;
+    margin-bottom: 48px;
+}
+
+/* --- M3 Expressive Card --- */
+.game-card {
+    background-color: var(--md-sys-color-surface-container-high);
+    border-radius: 24px; /* Expressive Shape (Large) */
+    overflow: hidden;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.3s var(--motion-spring-slow),
+                box-shadow 0.3s var(--motion-spring-slow);
+    border: 1px solid transparent;
+}
+
+.game-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 12px 24px rgba(0,0,0,0.4);
+    z-index: 10;
+    border-color: var(--md-sys-color-outline);
+}
+
+/* --- Media Section --- */
+.card-media {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16/9; /* Cinematic ratio */
+    background-color: #000;
+}
+
+.card-media {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 2 / 1;
+    overflow: hidden;
+    border-radius: var(--shape-corner-medium);
+    background-color: var(--md-sys-color-surface-container-highest);
+}
+
+.card-media img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+/* Badges on Image */
+.genre-badge {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    background: rgba(0,0,0,0.6);
+    backdrop-filter: blur(8px);
+    padding: 4px 10px;
+    border-radius: 8px;
+    font-size: 11px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: #fff;
+}
+
+.rating-badge {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    background: rgba(0,0,0,0.8);
+    color: #ffd700; /* Gold */
+    padding: 4px 8px;
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: 700;
+}
+.rating-badge .icon { font-size: 16px; font-variation-settings: 'FILL' 1; }
+
+/* Hover Overlay Actions */
+.hover-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0,0,0,0.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s;
+}
+.game-card:hover .hover-overlay {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.edit-fab {
+    width: 48px; height: 48px;
+    border-radius: 16px; /* Squircle */
+    border: none;
+    background: var(--md-sys-color-surface-container-highest);
+    color: var(--md-sys-color-on-surface);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transform: scale(0.8);
+    transition: transform 0.2s var(--motion-spring-bouncy);
+}
+.edit-fab:hover { transform: scale(1.1); background: var(--md-sys-color-primary); color: var(--md-sys-color-on-primary); }
+
+/* --- Content Section --- */
+.card-content {
+    padding: 16px 20px;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 12px;
+}
+
+.game-title {
+    font-size: 18px; /* Title Medium/Large */
+    font-weight: 600; /* Medium-Bold for readability */
+    line-height: 1.3;
+    color: var(--md-sys-color-on-surface);
+    margin: 0;
+
+    /* Truncate to 2 lines */
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.card-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: auto;
+}
+
+.platform-icon {
+    color: var(--md-sys-color-on-surface-variant);
+    opacity: 0.6;
+}
+
+/* --- Status Chips (M3 Assist Chips) --- */
+.status-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 0 12px 0 8px;
+    height: 32px;
+    border-radius: 8px;
+    font-size: 12px;
+    font-weight: 500;
+    transition: transform 0.2s var(--motion-spring-bouncy), box-shadow 0.2s;
+    cursor: default;
+}
+
+.status-chip:hover {
+    transform: translateY(-2px) scale(1.02);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    z-index: 1;
+}
+
+.chip-icon { font-size: 18px !important; }
+
+/* Color Mapping (Tonal) */
+/* Completed: Green Tones */
+.chip-completed {
+    background-color: #c4eed0; /* Light Green Container */
+    color: #0c3b1c;           /* Dark Green Text */
+}
+/* Playing: Primary Tones */
+.chip-playing {
+    background-color: var(--md-sys-color-primary-container);
+    color: var(--md-sys-color-on-primary-container);
+    border: 1px solid var(--md-sys-color-primary); /* Акцент */
+}
+/* On Hold: Surface Variant / Orange tint */
+.chip-on_hold {
+    background-color: #ffe08b;
+    color: #5d4200;
+}
+/* Dropped: Error Tones */
+.chip-dropped {
+    background-color: #ffdad6; /* Error Container */
+    color: #410002;           /* On Error Container */
+}
+/* Not Started: Surface Neutral */
+.chip-not_started {
+    background-color: var(--md-sys-color-surface-container-highest);
+    color: var(--md-sys-color-on-surface-variant);
+}
+
+/* --- Dialog Base (M3 Expressive) --- */
+dialog.m3-dialog {
+    border: none;
+    border-radius: 28px; /* Shape Extra Large */
+    background-color: var(--md-sys-color-surface-container-high);
+    color: var(--md-sys-color-on-surface);
+    padding: 0;
+    max-width: 90vw;
+    width: 800px; /* Expressive width */
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+
+    position: fixed; /* Фиксируем окно */
+    inset: 0;        /* Растягиваем область позиционирования на весь экран */
+    margin: auto;    /* Заставляем браузер центрировать блок внутри inset */
+    z-index: 1000;   /* Поверх всего */
+    /* ------------------------------------- */
+
+    /* Animation Initial State */
+    opacity: 0;
+    transform: scale(0.9);
+    transition:
+        opacity 0.3s cubic-bezier(0.2, 0.0, 0, 1.0),
+        transform 0.3s cubic-bezier(0.2, 0.0, 0, 1.0),
+        display 0.3s allow-discrete;
+}
+
+dialog.m3-dialog[open] {
+    opacity: 1;
+    transform: scale(1);
+    /* M3 Standard Easing */
+    transition: opacity 0.3s cubic-bezier(0.2, 0.0, 0, 1.0),
+                transform 0.3s cubic-bezier(0.2, 0.0, 0, 1.0);
+}
+
+/* Backdrop Blur */
+dialog.m3-dialog::backdrop {
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(4px);
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+dialog.m3-dialog[open]::backdrop {
+    opacity: 1;
+}
+
+/* --- Layout --- */
+.dialog-header {
+    padding: 24px 24px 16px;
+}
+.headline-small { font-size: 24px; font-weight: 400; margin-bottom: 4px; }
+.text-variant { color: var(--md-sys-color-on-surface-variant); font-size: 14px; }
+
+.split-layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* 2 Columns */
+    gap: 24px;
+    padding: 0 24px;
+}
+
+/* --- Inputs (Filled Text Field M3) --- */
+.inputs-column {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.row-group { display: flex; gap: 16px; }
+
+.m3-field {
+    position: relative;
+    background-color: var(--md-sys-color-surface-container-highest);
+    border-radius: 4px 4px 0 0; /* Top corners only */
+    height: 56px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    border-bottom: 1px solid var(--md-sys-color-on-surface-variant);
+    transition: background-color 0.2s;
+}
+
+.m3-field:hover { background-color: rgba(230, 225, 229, 0.12); /* Lighten overlay */ }
+.m3-field:focus-within { border-bottom: 2px solid var(--md-sys-color-primary); }
+
+/* Input Elements */
+.m3-field input, .m3-field select {
+    background: transparent;
+    border: none;
+    outline: none;
+    padding: 20px 16px 4px; /* Space for floating label */
+    color: var(--md-sys-color-on-surface);
+    font-family: inherit;
+    font-size: 16px;
+    width: 100%;
+    height: 100%;
+    appearance: none; /* Remove default select arrow */
+}
+
+/* Floating Label Magic */
+.m3-field label {
+    position: absolute;
+    left: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--md-sys-color-on-surface-variant);
+    font-size: 16px;
+    pointer-events: none;
+    transition: 0.2s cubic-bezier(0.2, 0.0, 0, 1.0);
+}
+
+/* Float Up State */
+.m3-field input:focus ~ label,
+.m3-field input:not(:placeholder-shown) ~ label,
+.m3-field select:focus ~ label,
+.m3-field select ~ label { /* Select always floated or needs JS check, simplified here */
+    top: 8px;
+    transform: none;
+    font-size: 12px;
+    color: var(--md-sys-color-primary);
+}
+.m3-field input:not(:focus):not(:placeholder-shown) ~ label { color: var(--md-sys-color-on-surface-variant); }
+
+.dropdown-icon {
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    pointer-events: none;
+    color: var(--md-sys-color-on-surface-variant);
+}
+
+/* --- Select & Options Styling --- */
+
+/* Меняем курсор на указатель */
+.m3-field select {
+    cursor: pointer;
+}
+
+/* Стилизация выпадающего списка (работает в Chrome/Edge/Firefox) */
+select option {
+    background-color: var(--md-sys-color-surface-container-high); /* Темный фон */
+    color: var(--md-sys-color-on-surface); /* Светлый текст */
+    padding: 12px; /* Отступы (работают не во всех браузерах) */
+    font-family: inherit;
+}
+
+/* Убираем синюю обводку фокуса в Firefox */
+select:-moz-focusring {
+    color: transparent;
+    text-shadow: 0 0 0 var(--md-sys-color-on-surface);
+}
+
+/* Исправление иконки стрелочки */
+.dropdown-icon {
+    position: absolute;
+    right: 16px; /* Чуть дальше от края */
+    top: 50%;
+    transform: translateY(-50%);
+    pointer-events: none;
+    color: var(--md-sys-color-on-surface-variant);
+    background-color: transparent; /* На случай перекрытия */
+}
+
+/* --- Preview Column (Expressive Image) --- */
+.preview-column {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.image-preview-container {
+    width: 100%;
+    height: 100%;
+    min-height: 200px;
+    background-color: #000;
+    border-radius: 16px; /* Shape Medium */
+    overflow: hidden;
+    position: relative;
+    border: 1px solid var(--md-sys-color-outline);
+}
+
+.image-preview-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    position: relative;
+    z-index: 2;
+}
+
+/* Скрытие картинки если src пустой (показываем плейсхолдер) */
+img[src=""], img:not([src]) { opacity: 0; }
+
+.preview-placeholder {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: var(--md-sys-color-on-surface-variant);
+    z-index: 1;
+    background-color: var(--md-sys-color-surface-container-highest);
+}
+
+.preview-caption {
+    text-align: right;
+    font-size: 12px;
+    color: var(--md-sys-color-primary);
+    font-weight: 500;
+}
+
+/* --- Actions Footer --- */
+.dialog-actions {
+    padding: 24px;
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+}
+
+.btn-text {
+    background: transparent;
+    border: none;
+    color: var(--md-sys-color-primary);
+    font-weight: 500;
+    padding: 10px 24px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 14px;
+
+    /* Добавляем пружину для трансформации */
+    transition: background-color 0.2s,
+                color 0.2s,
+                transform 0.2s var(--motion-spring-bouncy);
+}
+
+.btn-text:hover {
+    background-color: rgba(208, 188, 255, 0.12); /* Чуть ярче фон */
+    transform: scale(1.05); /* Легкое увеличение */
+}
+
+.btn-text:active {
+    transform: scale(0.95); /* Эффект нажатия (кнопка проваливается) */
+}
+
+/* Залитая кнопка (Save Changes) */
+.btn-filled {
+    background-color: var(--md-sys-color-primary);
+    color: var(--md-sys-color-on-primary);
+    border: none;
+    padding: 10px 24px;
+    border-radius: 100px;
+    font-weight: 500;
+    cursor: pointer;
+    font-size: 14px;
+
+    /* Добавляем пружину */
+    transition: box-shadow 0.2s,
+                background-color 0.2s,
+                transform 0.2s var(--motion-spring-bouncy);
+}
+
+.btn-filled:hover {
+    box-shadow: 0 8px 15px rgba(0,0,0,0.3); /* Тень поднимает кнопку выше */
+    transform: scale(1.05); /* Кнопка "надувается" */
+    background-color: var(--md-sys-color-primary-container); /* Легкое изменение цвета */
+    color: var(--md-sys-color-on-primary-container);
+}
+
+.btn-filled:active {
+    transform: scale(0.95); /* При клике кнопка сжимается */
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2); /* Тень уменьшается */
+}
+
+/* Mobile Adaptability */
+@media (max-width: 600px) {
+    .split-layout { grid-template-columns: 1fr; }
+    .image-preview-container { height: 160px; }
+    dialog.m3-dialog { width: 100%; height: 100%; max-height: 100%; border-radius: 0; }
+}
+
+/* --- Панель управления (Control Bar M3) --- */
+.library-controls {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 24px;
+    background-color: var(--md-sys-color-surface);
+    position: sticky; /* Прилипание к верху */
+    top: 0;
+    z-index: 90;
+    padding: 16px 0;
+}
+
+/* Эффект размытия фона (Blur) для прилипающего хедера */
+.library-controls::before {
+    content: '';
+    position: absolute;
+    inset: -16px -50vw; /* Растягиваем на всю ширину экрана */
+    background: var(--md-sys-color-surface);
+    opacity: 0.95;
+    z-index: -1;
+    backdrop-filter: blur(8px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+}
+
+/* Поисковая строка (Pill Shape) */
+.search-container {
+    flex: 1;
+    min-width: 280px;
+    height: 56px;
+    background-color: var(--md-sys-color-surface-container-high);
+    border-radius: 50px;
+    display: flex;
+    align-items: center;
+    padding: 0 24px;
+    transition: background-color 0.2s, box-shadow 0.2s;
+}
+
+.search-container:focus-within {
+    background-color: var(--md-sys-color-surface-container-highest);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.search-icon {
+    color: var(--md-sys-color-on-surface-variant);
+    font-size: 24px;
+    margin-right: 12px;
+}
+
+.search-container input {
+    border: none;
+    background: transparent;
+    font-size: 16px;
+    color: var(--md-sys-color-on-surface);
+    width: 100%;
+    outline: none;
+}
+
+/* Правая часть управления */
+.controls-right {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+}
+
+/* Круглая кнопка с обводкой (Outlined Icon Button) */
+.icon-btn-outlined {
+    width: 40px; height: 40px;
+    border-radius: 50%;
+    border: 1px solid var(--md-sys-color-outline);
+    background: transparent;
+    color: var(--md-sys-color-on-surface-variant);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: 0.2s;
+}
+.icon-btn-outlined:hover {
+    background-color: var(--md-sys-color-surface-container-highest);
+    color: var(--md-sys-color-on-surface);
+}
+
+/* Выпадающий список сортировки */
+.select-wrapper {
+    position: relative;
+    height: 40px;
+    background-color: transparent;
+    border: 1px solid var(--md-sys-color-outline);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    padding: 0 12px;
+    min-width: 160px; /* Чуть шире для русского текста */
+}
+
+.select-wrapper select {
+    appearance: none;
+    border: none;
+    background: transparent;
+    color: var(--md-sys-color-on-surface);
+    font-size: 14px;
+    font-weight: 500;
+    width: 100%;
+    cursor: pointer;
+    outline: none;
+    z-index: 2;
+}
+
+.select-wrapper .arrow {
+    position: absolute;
+    right: 8px;
+    font-size: 18px;
+    color: var(--md-sys-color-on-surface-variant);
+    pointer-events: none;
+    z-index: 1;
+}
+
+/* Группа кнопок (Segmented Button) для переключения вида */
+.segmented-btn-group {
+    display: flex;
+    border: 1px solid var(--md-sys-color-outline);
+    border-radius: 20px;
+    overflow: hidden;
+    height: 40px;
+}
+
+.view-btn {
+    background: transparent;
+    border: none;
+    border-right: 1px solid var(--md-sys-color-outline);
+    width: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--md-sys-color-on-surface-variant);
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.view-btn:last-child { border-right: none; }
+.view-btn:hover { background-color: var(--md-sys-color-surface-container-highest); }
+
+.view-btn.active {
+    background-color: var(--md-sys-color-secondary-container);
+    color: var(--md-sys-color-on-secondary-container);
+}
+
+/* --- Модификаторы Вида (View Modes) --- */
+
+/* 1. Режим Списка (List View) */
+.cards-grid.view-list {
+    grid-template-columns: 1fr; /* Одна колонка */
+    gap: 12px;
+}
+
+.view-list .game-card {
+    flex-direction: row; /* Горизонтальная карточка */
+    height: 100px;
+    border-radius: 12px;
+}
+
+.view-list .card-media {
+    width: 140px;
+    aspect-ratio: auto;
+    height: 100%;
+}
+
+.view-list .card-content {
+    flex-direction: row;
+    align-items: center;
+    padding: 0 16px;
+}
+
+.view-list .game-title {
+    flex: 1;
+    font-size: 16px;
+    -webkit-line-clamp: 1; /* Обрезка до 1 строки */
+}
+
+.view-list .card-footer {
+    gap: 16px;
+    margin-top: 0;
+}
+
+/* 2. Компактный режим (Compact/Tiles) */
+.cards-grid.view-compact {
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    gap: 16px;
+}
+
+.view-compact .game-card {
+    border-radius: 12px;
+}
+
+.view-compact .card-media {
+    aspect-ratio: 2/3; /* Портретный постер */
+}
+
+.view-compact .card-content {
+    display: none; /* Скрываем текст */
+}
+
+/* Показываем кнопку редактирования при наведении даже в компактном режиме */
+.view-compact .hover-overlay { opacity: 0; }
+.view-compact .game-card:hover .hover-overlay { opacity: 1; }
+
+/* Настройки заголовка аккордеона */
+.group-header {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+
+    /* Делаем всю строку кликабельной и приятной */
+    padding: 8px 16px 8px 8px; /* Слева меньше отступ, так как там кнопка */
+    margin: 16px 0 24px -8px; /* Компенсируем padding, чтобы выровнять текст */
+
+    border-radius: 100px; /* Full Stadium Shape (Пилюля) */
+    cursor: pointer;
+    user-select: none;
+
+    /* Плавный цвет фона при наведении на всю строку */
+    transition: background-color 0.2s cubic-bezier(0.2, 0.0, 0, 1.0);
+}
+
+.group-header:hover {
+    background-color: var(--md-sys-color-surface-container-low); /* Едва заметная подсветка строки */
+}
+
+.toggle-icon {
+    appearance: none;
+    border: none;
+    outline: none;
+
+    /* Размеры (Touch Target 40-48px) */
+    width: 40px;
+    height: 40px;
+    min-width: 40px;
+
+    /* Форма: Круг (M3 Standard) */
+    border-radius: 50%;
+
+    /* Цвета: Tonal Button Style */
+    background-color: var(--md-sys-color-surface-container-high);
+    color: var(--md-sys-color-on-surface-variant);
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    /* Анимация M3 (Standard Easing) */
+    transition:
+        transform 0.4s cubic-bezier(0.2, 0.0, 0, 1.0),
+        background-color 0.2s,
+        color 0.2s;
+}
+
+.group-header:hover .toggle-icon {
+    background-color: var(--md-sys-color-surface-container-highest);
+    color: var(--md-sys-color-on-surface);
+}
+
+/* Поворот стрелки при сворачивании */
+.franchise-group:not(.is-collapsed) .toggle-icon {
+    /* Активный цвет (Primary Container) */
+    background-color: var(--md-sys-color-secondary-container);
+    color: var(--md-sys-color-on-secondary-container);
+
+    /* Поворот на 180 градусов (smooth flip) */
+    transform: rotate(180deg);
+}
+
+/* Текст заголовка */
+.title-large {
+    font-family: 'Roboto Flex', sans-serif;
+    font-weight: 500;
+    font-size: 22px;
+    color: var(--md-sys-color-on-surface);
+    letter-spacing: -0.5px;
+}
+
+/* Разделительная линия */
+.divider {
+    flex-grow: 1;
+    height: 1px;
+    background: var(--md-sys-color-outline-variant);
+    margin: 0 16px;
+    opacity: 0.6;
+}

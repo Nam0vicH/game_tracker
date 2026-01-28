@@ -1,0 +1,370 @@
+:root {
+    /* --- M3 Expressive Color Palette (Deep Violet Seed) --- */
+    --md-sys-color-surface: #0f0d13; /* Очень темный, почти черный */
+    --md-sys-color-surface-container: #1d1b24;
+    --md-sys-color-surface-container-high: #2b2831;
+    --md-sys-color-surface-container-highest: #36333d;
+
+    --md-sys-color-primary: #d0bcff;
+    --md-sys-color-on-primary: #381e72;
+    --md-sys-color-primary-container: #4f378b;
+    --md-sys-color-on-primary-container: #eaddff;
+
+    --md-sys-color-secondary: #ccc2dc;
+    --md-sys-color-tertiary: #efb8c8; /* Pinkish for expressive accents */
+
+    --md-sys-color-on-surface: #e6e1e5;
+    --md-sys-color-on-surface-variant: #cac4d0;
+    --md-sys-color-outline: #938f99;
+
+    /* Status Colors */
+    --status-playing: #d0bcff;       /* Primary */
+    --status-completed: #a8eff0;     /* Cyan-ish */
+    --status-hold: #ffb4ab;          /* Red-ish/Orange */
+    --status-dropped: #ffb4ab;       /* Error */
+    --status-backlog: #cac4d0;       /* Neutral */
+
+    /* --- Typography (Roboto Flex) --- */
+    --font-family: 'Roboto Flex', sans-serif;
+
+    /* --- Motion Physics (Spring) --- */
+    /* Пружинистая анимация: overshoot */
+    --motion-spring-slow: cubic-bezier(0.175, 0.885, 0.32, 1.1);
+    --motion-spring-bouncy: cubic-bezier(0.175, 0.885, 0.32, 1.275);
+
+    /* --- Shapes --- */
+    --shape-corner-small: 8px;
+    --shape-corner-medium: 16px;
+    --shape-corner-large: 24px;
+    --shape-corner-xl: 32px;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+    background-color: var(--md-sys-color-surface);
+    color: var(--md-sys-color-on-surface);
+    font-family: var(--font-family);
+    display: flex;
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+
+/* --- Expressive Navigation Rail --- */
+.nav-rail {
+    position: fixed;
+    height: 100vh;
+    width: 88px;
+    display: flex;
+    justify-content: center;
+    padding: 24px 0;
+    z-index: 100;
+}
+
+.nav-container {
+    background-color: var(--md-sys-color-surface-container);
+    border-radius: 44px; /* Pill Shape */
+    padding: 16px 12px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 32px;
+    height: 95vh;
+    width: 64px; /* Фиксированная ширина, чтобы не расширялся */
+    box-shadow: 0 4px 20px rgba(0,0,0,0.2); /* Легкая тень контейнера */
+}
+
+/* FAB Menu Replacement */
+.nav-fab {
+    width: 56px;
+    height: 56px;
+    background-color: var(--md-sys-color-primary-container);
+    color: var(--md-sys-color-on-primary-container);
+    border-radius: 16px; /* Squircle */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+
+    /* Анимация */
+    transition: transform 0.3s var(--motion-spring-bouncy),
+                box-shadow 0.3s ease,
+                border-radius 0.3s ease;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+}
+
+.nav-fab:hover {
+    transform: scale(1.1) rotate(90deg); /* Вращение и увеличение */
+    border-radius: 50%; /* Превращение в круг */
+    box-shadow: 0 8px 16px rgba(0,0,0,0.4);
+    background-color: var(--md-sys-color-primary); /* Становится ярче */
+    color: var(--md-sys-color-on-primary);
+}
+
+/* Эффект нажатия (Клик) */
+.nav-fab:active {
+    transform: scale(0.9); /* Сильное сжатие */
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+
+.nav-group {
+    display: flex;
+    flex-direction: column;
+    gap: 16px; /* Чуть больше воздуха */
+    width: 100%;
+    align-items: center;
+}
+
+/* --- FAB Speed Dial System --- */
+
+/* Контейнер для позиционирования */
+.fab-wrapper {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* Убеждаемся, что меню вылезает поверх всего */
+    z-index: 200;
+}
+
+/* Контейнер списка опций */
+.fab-options {
+    position: absolute;
+    left: 100%; /* Справа от кнопки FAB */
+    top: 50%;
+    transform: translateY(-50%);
+    margin-left: 12px; /* Отступ от кнопки */
+    display: flex;
+    flex-direction: column; /* Вертикальный список */
+    gap: 8px;
+    align-items: flex-start;
+    pointer-events: none; /* Чтобы не мешать кликам, пока скрыто */
+    width: max-content; /* Ширина по содержимому пилюль */
+}
+
+/* --- Pill Buttons (Опции) --- */
+.fab-pill {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 20px 12px 16px;
+    background-color: var(--md-sys-color-primary-container);
+    color: var(--md-sys-color-on-primary-container);
+    border: none;
+    border-radius: 16px; /* M3 Medium shape */
+
+    font-family: var(--font-family);
+    font-size: 14px;
+    font-weight: 500;
+    white-space: nowrap;
+    cursor: pointer;
+
+    /* Начальное состояние анимации (Скрыто) */
+    opacity: 0;
+    transform: translateX(-20px) scale(0.9);
+
+    /* Физика появления */
+    transition:
+        transform 0.3s var(--motion-spring-bouncy),
+        opacity 0.2s ease,
+        background-color 0.2s;
+
+    /* M3 Elevation Level 2 */
+    box-shadow: 0 1px 2px rgba(0,0,0,0.3), 0 2px 6px 2px rgba(0,0,0,0.15);
+}
+
+.fab-pill span.material-symbols-rounded {
+    font-size: 20px;
+    color: var(--md-sys-color-on-primary-container);
+}
+
+.fab-pill:hover {
+    background-color: var(--md-sys-color-primary);
+    color: var(--md-sys-color-on-primary);
+    transform: translateX(0) scale(1.02);
+}
+
+.fab-pill:hover span.material-symbols-rounded {
+    color: var(--md-sys-color-on-primary);
+}
+
+/* --- Active State (Menu OPEN) --- */
+
+/* 1. Показываем опции */
+.fab-wrapper.is-open .fab-options {
+    pointer-events: auto;
+}
+
+.fab-wrapper.is-open .fab-pill {
+    opacity: 1;
+    transform: translateX(0) scale(1);
+}
+
+/* 2. Staggered Animation (Эффект "вытекания" по очереди) */
+/* Нижняя кнопка (Franchise) появляется первой */
+.fab-wrapper.is-open .fab-pill:nth-child(2) {
+    transition-delay: 0.05s;
+}
+/* Верхняя кнопка (Game) появляется второй */
+.fab-wrapper.is-open .fab-pill:nth-child(1) {
+    transition-delay: 0.1s;
+}
+
+/* 3. Трансформация основной кнопки (Trigger) */
+.fab-wrapper.is-open .nav-fab {
+    /* Меняем цвет на Secondary Container */
+    background-color: var(--md-sys-color-secondary);
+    color: #1d1b24; /* On-Secondary */
+    /* Вращаем в крестик (45 градусов) */
+    transform: rotate(135deg); /* 135 приятнее, чем 45, больше движения */
+    box-shadow: 0 0 0 4px rgba(204, 194, 220, 0.3); /* Ring effect */
+}
+
+/* ВАЖНО: Отключаем ховер-вращение (из прошлого кода), когда меню открыто */
+.fab-wrapper.is-open .nav-fab:hover {
+    transform: rotate(135deg) scale(1.1); /* Оставляем крестик, но даем увеличить */
+    border-radius: 20px; /* Не превращаем в круг, оставляем скругленный квадрат */
+}
+.material-symbols-rounded {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 1em;
+    height: 1em;
+    overflow: hidden;
+    line-height: 1;
+
+    font-family: 'Material Symbols Rounded';
+    font-weight: normal;
+    font-style: normal;
+    letter-spacing: normal;
+    text-transform: none;
+    white-space: nowrap;
+    word-wrap: normal;
+    direction: ltr;
+    -webkit-font-smoothing: antialiased;
+
+    contain: layout size;
+}
+
+
+/* --- Expressive Navigation Rail --- */
+.nav-rail {
+    position: fixed;
+    height: 100vh;
+    width: 96px; /* Чуть увеличили область рейла (было 88px) */
+    display: flex;
+    justify-content: center;
+    padding: 24px 0;
+    z-index: 100;
+}
+
+.nav-container {
+    background-color: var(--md-sys-color-surface-container);
+    border-radius: 44px; /* Pill Shape */
+
+    /* 1. Исправление ширины */
+    width: 80px; /* Стандарт M3. Было 64px (слишком узко для текста) */
+
+    /* 2. Отступы */
+    padding: 24px 0; /* Убрали боковые отступы (12px), чтобы дать место кнопкам */
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 24px; /* Чуть уменьшили отступ между кнопками, чтобы влезло больше */
+    height: 95vh;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+}
+
+/* --- Nav Items (Buttons) --- */
+.nav-item {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+
+    /* 3. Фиксированные размеры кнопки */
+    width: 64px; /* Кнопка чуть уже контейнера (80px), создаст красивые отступы по бокам */
+    height: 64px; /* Квадратная пропорция */
+
+    color: var(--md-sys-color-on-surface-variant);
+    text-decoration: none;
+    background: transparent;
+    transition: transform 0.1s ease, color 0.2s ease;
+    z-index: 1;
+}
+
+/* Размер текста под иконкой */
+.nav-item .label {
+    font-size: 11px; /* Мелкий шрифт, чтобы влезали длинные слова */
+    font-weight: 500;
+    letter-spacing: 0.1px;
+    text-align: center;
+
+    /* Обрезаем текст, если он все равно слишком длинный */
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 100%;
+}
+
+/* Фон активной кнопки */
+.nav-item::before {
+    content: '';
+    position: absolute;
+    /* Фон теперь не на всю высоту, а чуть компактнее, как в M3 */
+    top: 4px;
+    bottom: 4px;
+    left: 0;
+    right: 0;
+
+    border-radius: 20px; /* Squircle */
+    background-color: var(--md-sys-color-secondary);
+    z-index: -1;
+    opacity: 0;
+    transform: scale(0.3);
+    transition: transform 0.4s var(--motion-spring-bouncy), opacity 0.2s ease;
+}
+
+/* Hover эффект */
+.nav-item:not(.active):hover {
+    background-color: rgba(255,255,255,0.05);
+    border-radius: 20px;
+}
+
+/* Active State */
+.nav-item.active {
+    color: #1d1b24;
+    transform: translateY(0); /* Убрал подпрыгивание, оно может сбивать верстку в тесном ряду */
+}
+
+.nav-item.active::before {
+    opacity: 1;
+    transform: scale(1);
+}
+
+.nav-item .icon {
+    font-size: 24px; /* Чуть аккуратнее */
+    margin-bottom: 2px;
+    transition: font-variation-settings 0.3s ease, transform 0.4s var(--motion-spring-bouncy);
+}
+
+.nav-item.active .icon {
+    font-variation-settings: 'FILL' 1, 'wght' 700;
+    transform: scale(1.1);
+}
+
+.nav-item:active {
+    transform: scale(0.95);
+}
+
+/* Корректировка отступа основного контента */
+.main-content {
+    margin-left: 120px; /* Увеличили отступ, так как рейл стал шире (96px + зазор) */
+    width: calc(100% - 120px);
+    padding: 32px 48px;
+}

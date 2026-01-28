@@ -1,0 +1,217 @@
+{% extends "base.html" %}
+
+{% block page_css %}
+<style>
+    /* Стили, специфичные для страницы настроек */
+    .settings-container {
+        max-width: 900px;
+        margin: 0 auto;
+        /* Небольшая анимация появления контента */
+        animation: fadeIn 0.4s ease-out;
+    }
+
+    @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(10px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+
+    h1 {
+        font-size: 32px;
+        font-weight: 600;
+        margin-bottom: 32px;
+        color: var(--md-sys-color-on-surface);
+    }
+
+    .settings-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 24px;
+    }
+
+    /* --- M3 Card Style --- */
+    .settings-card {
+        background-color: var(--md-sys-color-surface-container-high);
+        border-radius: var(--shape-corner-large);
+        padding: 24px;
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    }
+
+    .card-header h2 {
+        font-size: 20px;
+        font-weight: 500;
+        color: var(--md-sys-color-on-surface);
+    }
+    .card-header p {
+        font-size: 14px;
+        color: var(--md-sys-color-on-surface-variant);
+        margin-top: 4px;
+    }
+
+    /* --- Theme Swatches --- */
+    .swatch-grid {
+        display: flex;
+        gap: 16px;
+        flex-wrap: wrap;
+    }
+
+    .theme-swatch {
+        width: 48px;
+        height: 48px;
+        border-radius: 50%;
+        cursor: pointer;
+        position: relative;
+        transition: transform 0.3s var(--motion-spring-bouncy), border-color 0.2s;
+    }
+
+    .theme-swatch:hover {
+        transform: scale(1.1);
+    }
+
+    .theme-swatch.active {
+        border-color: var(--md-sys-color-on-surface);
+        transform: scale(1.1);
+    }
+
+    .theme-swatch::after {
+        content: 'check';
+        font-family: 'Material Symbols Rounded';
+        position: absolute;
+        top: 50%; left: 50%;
+        transform: translate(-50%, -50%) scale(0);
+        color: white; 
+        font-weight: 700;
+        transition: transform 0.2s var(--motion-spring-bouncy);
+    }
+
+    .theme-swatch.active::after {
+        transform: translate(-50%, -50%) scale(1);
+    }
+
+    /* --- Custom Color Picker --- */
+    .color-picker-wrapper {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+    }
+
+    input[type="color"] {
+        -webkit-appearance: none;
+        border: none;
+        width: 64px;
+        height: 40px;
+        border-radius: 20px;
+        cursor: pointer;
+        padding: 0;
+        overflow: hidden;
+        box-shadow: 0 0 0 1px var(--md-sys-color-outline);
+    }
+    input[type="color"]::-webkit-color-swatch-wrapper { padding: 0; }
+    input[type="color"]::-webkit-color-swatch { border: none; }
+
+    /* --- Segmented Button --- */
+    .segmented-group {
+        display: flex;
+        border: 1px solid var(--md-sys-color-outline);
+        border-radius: 20px;
+        overflow: hidden;
+        height: 40px;
+    }
+
+    .segment-btn {
+        flex: 1;
+        background: transparent;
+        border: none;
+        color: var(--md-sys-color-on-surface-variant);
+        font-family: var(--font-family);
+        font-size: 14px;
+        font-weight: 500;
+        cursor: pointer;
+        border-right: 1px solid var(--md-sys-color-outline);
+        transition: background-color 0.2s, color 0.2s;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+    }
+
+    .segment-btn:last-child { border-right: none; }
+
+    .segment-btn:hover {
+        background-color: rgba(255, 255, 255, 0.05);
+    }
+
+    .segment-btn.active {
+        background-color: var(--md-sys-color-secondary);
+        color: #1d1b24; /* on-secondary fixed color */
+    }
+
+    .segment-btn .material-symbols-rounded {
+        font-size: 18px;
+        display: none;
+    }
+    .segment-btn.active .material-symbols-rounded {
+        display: inline-block;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="settings-container">
+    <h1>Appearance</h1>
+
+    <div class="settings-grid">
+        
+        <!-- Card 1: Theme Presets -->
+        <article class="settings-card">
+            <div class="card-header">
+                <h2>Color Scheme</h2>
+                <p>Pick a preset palette</p>
+            </div>
+            <div class="swatch-grid">
+                <div class="theme-swatch active" data-theme="violet" style="background: linear-gradient(135deg, #d0bcff 0%, #4f378b 100%);" title="Deep Violet"></div>
+                <div class="theme-swatch" data-theme="ocean" style="background: linear-gradient(135deg, #a8eff0 0%, #004a77 100%);" title="Ocean Blue"></div>
+                <div class="theme-swatch" data-theme="emerald" style="background: linear-gradient(135deg, #baffc9 0%, #0c6a38 100%);" title="Emerald Nature"></div>
+                <div class="theme-swatch" data-theme="volcanic" style="background: linear-gradient(135deg, #ffb4ab 0%, #93000a 100%);" title="Volcanic Red"></div>
+            </div>
+        </article>
+
+        <!-- Card 2: Custom -->
+        <article class="settings-card">
+            <div class="card-header">
+                <h2>Custom Accent</h2>
+                <p>Generate a theme from a single color</p>
+            </div>
+            <div class="color-picker-wrapper">
+                <input type="color" id="customColorInput" value="#d0bcff">
+                <span id="hexValueLabel" style="font-family: monospace; opacity: 0.7; color: var(--md-sys-color-on-surface);">#D0BCFF</span>
+            </div>
+        </article>
+
+        <!-- Card 3: Background Mode -->
+        <article class="settings-card">
+            <div class="card-header">
+                <h2>Background Depth</h2>
+                <p>Adjust dark mode contrast</p>
+            </div>
+            <div class="segmented-group">
+                <button class="segment-btn" data-bg="oled">
+                    <span class="material-symbols-rounded">check</span> OLED
+                </button>
+                <button class="segment-btn active" data-bg="default">
+                    <span class="material-symbols-rounded">check</span> Default
+                </button>
+                <button class="segment-btn" data-bg="soft">
+                    <span class="material-symbols-rounded">check</span> Soft
+                </button>
+            </div>
+        </article>
+
+    </div>
+</div>
+
+
+<script src="{{ url_for('static', filename='js/settings.js') }}"></script>
+{% endblock %}

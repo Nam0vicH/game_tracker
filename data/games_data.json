@@ -1,0 +1,394 @@
+{
+    "franchises": {
+        "Atomic Heart": {
+            "total_count": 1,
+            "games": [
+                {
+                    "title": "Atomic Heart",
+                    "rating": 8.0,
+                    "status": "completed",
+                    "date_added": "2026-01-25",
+                    "platform": "PC",
+                    "genre": "Action",
+                    "thumbnail": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/668580/header.jpg?t=1764675129"
+                }
+            ]
+        },
+        "Grand Theft Auto": {
+            "total_count": 5,
+            "games": [
+                {
+                    "title": "Grand Theft Auto: Vice City",
+                    "rating": 9.0,
+                    "status": "completed",
+                    "date_added": "2026-01-25",
+                    "platform": "PC",
+                    "genre": "Action",
+                    "thumbnail": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/12110/header.jpg?t=1634144465"
+                },
+                {
+                    "title": "Grand Theft Auto: San Andreas",
+                    "rating": 8.5,
+                    "status": "completed",
+                    "date_added": "2026-01-25",
+                    "platform": "PC",
+                    "genre": "Action",
+                    "thumbnail": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/12120/capsule_231x87.jpg?t=1747175350"
+                },
+                {
+                    "title": "Grand Theft Auto V",
+                    "rating": 0.0,
+                    "status": "on_hold",
+                    "platform": "PC",
+                    "genre": "Action",
+                    "date_added": "2026-01-25",
+                    "thumbnail": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/271590/header.jpg?t=1765387725"
+                },
+                {
+                    "title": "Grand Theft Auto: 4",
+                    "rating": 8.5,
+                    "status": "completed",
+                    "date_added": "2026-01-25",
+                    "platform": "PC",
+                    "genre": "Action",
+                    "thumbnail": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/12210/header.jpg?t=1721061564"
+                }
+            ]
+        },
+        "Resident Evil": {
+            "total_count": 12,
+            "games": [
+                {
+                    "title": "Resident Evil 4",
+                    "rating": 9.0,
+                    "status": "completed",
+                    "date_added": "2026-01-25",
+                    "platform": "PC",
+                    "genre": "Horror",
+                    "thumbnail": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/2050650/header.jpg?t=1736385712"
+                },
+                {
+                    "title": "Resident Evil 2",
+                    "rating": 9.0,
+                    "status": "completed",
+                    "date_added": "2026-01-25",
+                    "platform": "PC",
+                    "genre": "Horror",
+                    "thumbnail": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/883710/header.jpg?t=1768954831"
+                },
+                {
+                    "title": "Resident Evil Village",
+                    "rating": 8.0,
+                    "status": "completed",
+                    "date_added": "2026-01-25",
+                    "platform": "PC",
+                    "genre": "Horror",
+                    "thumbnail": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/1196590/header.jpg?t=1769125526"
+                },
+                {
+                    "title": "Resident Evil 7 Biohazard",
+                    "rating": 7.0,
+                    "status": "completed",
+                    "date_added": "2026-01-25",
+                    "platform": "PC",
+                    "genre": "Horror",
+                    "thumbnail": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/418370/header.jpg?t=1769125301"
+                },
+                {
+                    "title": "Resident Evil 3",
+                    "rating": 7.5,
+                    "status": "completed",
+                    "date_added": "2026-01-25",
+                    "platform": "PC",
+                    "genre": "Horror",
+                    "thumbnail": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/952060/header.jpg?t=1768956538"
+                },
+                {
+                    "title": "Resident Evil Requiem",
+                    "rating": 7.5,
+                    "status": "not_started",
+                    "date_added": "2026-01-25",
+                    "platform": "PC",
+                    "genre": "Horror",
+                    "thumbnail": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/3764200/ce5437442768e38eb575f205ab9397d0264017b0/header.jpg?t=1769125588"
+                },
+                {
+                    "title": "Resident Evil Revelations 2",
+                    "rating": 0.0,
+                    "status": "not_started",
+                    "date_added": "2026-01-25",
+                    "platform": "PC",
+                    "genre": "Horror",
+                    "thumbnail": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/287290/header.jpg?t=1769125412"
+                },
+                {
+                    "title": "Resident Evil 6",
+                    "rating": 0.0,
+                    "status": "not_started",
+                    "date_added": "2026-01-25",
+                    "platform": "PC",
+                    "genre": "Horror",
+                    "thumbnail": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/221040/header.jpg?t=1768960676"
+                },
+                {
+                    "title": "Resident Evil Revelations",
+                    "rating": 0.0,
+                    "status": "not_started",
+                    "date_added": "2026-01-25",
+                    "platform": "PC",
+                    "genre": "Horror",
+                    "thumbnail": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/222480/header.jpg?t=1769125357"
+                },
+                {
+                    "title": "Resident Evil 0",
+                    "rating": 0.0,
+                    "status": "not_started",
+                    "date_added": "2026-01-25",
+                    "platform": "PC",
+                    "genre": "Horror",
+                    "thumbnail": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/339340/header.jpg?t=1768953920"
+                },
+                {
+                    "title": "Resident Evil",
+                    "rating": 0.0,
+                    "status": "not_started",
+                    "date_added": "2026-01-25",
+                    "platform": "PC",
+                    "genre": "Horror",
+                    "thumbnail": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/304240/header.jpg?t=1768956401"
+                },
+                {
+                    "title": "Resident Evil 5",
+                    "rating": 0.0,
+                    "status": "not_started",
+                    "date_added": "2026-01-25",
+                    "platform": "PC",
+                    "genre": "Horror",
+                    "thumbnail": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/21690/header.jpg?t=1768960574"
+                }
+            ]
+        },
+        "Red Dead Redemption": {
+            "total_count": 2,
+            "games": [
+                {
+                    "title": "Red Dead Redemption 2",
+                    "rating": 0.0,
+                    "status": "playing",
+                    "platform": "PC",
+                    "genre": "Adventure",
+                    "date_added": "2026-01-25",
+                    "thumbnail": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/1174180/header.jpg?t=1759502961"
+                },
+                {
+                    "title": "Red Dead Redemption",
+                    "rating": 0.0,
+                    "status": "not_started",
+                    "platform": "PC",
+                    "genre": "Adventure",
+                    "date_added": "2026-01-25",
+                    "thumbnail": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/2668510/header.jpg?t=1741118459"
+                }
+            ]
+        },
+        "The Last of Us": {
+            "total_count": 2,
+            "games": [
+                {
+                    "title": "The Last of Us",
+                    "rating": 9.0,
+                    "status": "completed",
+                    "platform": "PlayStation",
+                    "genre": "Horror",
+                    "date_added": "2026-01-25",
+                    "thumbnail": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/1888930/header.jpg?t=1750959031"
+                },
+                {
+                    "title": "The Last of Us 2",
+                    "rating": 8.5,
+                    "status": "completed",
+                    "platform": "PC",
+                    "genre": "Horror",
+                    "date_added": "2026-01-25",
+                    "thumbnail": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/2531310/header.jpg?t=1750959180"
+                }
+            ]
+        },
+        "Until Dawn": {
+            "total_count": 1,
+            "games": [
+                {
+                    "title": "Until Dawn",
+                    "rating": 7.0,
+                    "status": "completed",
+                    "platform": "PC",
+                    "genre": "Choices Matter",
+                    "date_added": "2026-01-25",
+                    "thumbnail": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/2172010/header.jpg?t=1750959555"
+                }
+            ]
+        },
+        "God of War": {
+            "total_count": 5,
+            "games": [
+                {
+                    "title": "God of War 2018",
+                    "rating": 8.0,
+                    "status": "completed",
+                    "platform": "PlayStation",
+                    "genre": "Action",
+                    "date_added": "2026-01-25",
+                    "thumbnail": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/1593500/header.jpg?t=1763059412"
+                },
+                {
+                    "title": "God of War Ragnarök",
+                    "rating": 8.0,
+                    "status": "completed",
+                    "platform": "PC",
+                    "genre": "Action",
+                    "date_added": "2026-01-25",
+                    "thumbnail": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/2322010/header.jpg?t=1750909504"
+                }
+            ]
+        },
+        "UNCHARTED": {
+            "total_count": 3,
+            "games": [
+                {
+                    "title": "UNCHARTED™: Legacy of Thieves Collection",
+                    "rating": 8.0,
+                    "status": "completed",
+                    "platform": "PlayStation",
+                    "genre": "Adventure",
+                    "date_added": "2026-01-25",
+                    "thumbnail": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/1659420/header.jpg?t=1751913411"
+                }
+            ]
+        },
+        "Horizon": {
+            "total_count": 2,
+            "games": [
+                {
+                    "title": "Horizon Zero Dawn™ Complete Edition",
+                    "rating": 0.0,
+                    "status": "dropped",
+                    "platform": "PC",
+                    "genre": "Adventure",
+                    "date_added": "2026-01-25",
+                    "thumbnail": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/1151640/header.jpg?t=1750105817"
+                },
+                {
+                    "title": "Horizon Forbidden West",
+                    "rating": 0.0,
+                    "status": "not_started",
+                    "platform": "PC",
+                    "genre": "Adventure",
+                    "date_added": "2026-01-25",
+                    "thumbnail": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/2420110/header.jpg?t=1763576690"
+                }
+            ]
+        },
+        "Ghost of Tsushima": {
+            "total_count": 2,
+            "games": [
+                {
+                    "title": "Ghost of Tsushima DIRECTOR'S CUT",
+                    "rating": 9.0,
+                    "status": "completed",
+                    "platform": "PlayStation",
+                    "genre": "Open World",
+                    "date_added": "2026-01-25",
+                    "thumbnail": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/2215430/header.jpg?t=1763409398"
+                }
+            ]
+        },
+        "Marvel’s Spider-Man": {
+            "total_count": 3,
+            "games": [
+                {
+                    "title": "Marvel’s Spider-Man",
+                    "rating": 9.0,
+                    "status": "completed",
+                    "platform": "PlayStation",
+                    "genre": "Superhero",
+                    "date_added": "2026-01-25",
+                    "thumbnail": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/1817070/header.jpg?t=1763569047"
+                },
+                {
+                    "title": "Marvel’s Spider-Man: Miles Morales",
+                    "rating": 8.0,
+                    "status": "completed",
+                    "platform": "PC",
+                    "genre": "Superhero",
+                    "date_added": "2026-01-25",
+                    "thumbnail": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/1817190/header.jpg?t=1763569499"
+                },
+                {
+                    "title": "Marvel's Spider-Man 2",
+                    "rating": 7.0,
+                    "status": "completed",
+                    "platform": "PC",
+                    "genre": "Superhero",
+                    "date_added": "2026-01-25",
+                    "thumbnail": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/2651280/header.jpg?t=1763569811"
+                }
+            ]
+        },
+        "Metal Gear": {
+            "total_count": 4,
+            "games": [
+                {
+                    "title": "METAL GEAR SOLID",
+                    "rating": 6.5,
+                    "status": "completed",
+                    "platform": "PC",
+                    "genre": "Stealth",
+                    "date_added": "2026-01-25",
+                    "thumbnail": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/2131630/header.jpg?t=1737564028"
+                },
+                {
+                    "title": "METAL GEAR SOLID 2: Sons of Liberty",
+                    "rating": 8.0,
+                    "status": "completed",
+                    "platform": "PC",
+                    "genre": "Stealth",
+                    "date_added": "2026-01-25",
+                    "thumbnail": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/2131640/header.jpg?t=1737564625"
+                },
+                {
+                    "title": "METAL GEAR SOLID 3: Snake Eater",
+                    "rating": 9.0,
+                    "status": "completed",
+                    "platform": "PC",
+                    "genre": "Stealth",
+                    "date_added": "2026-01-25",
+                    "thumbnail": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/2131650/header.jpg?t=1737564722"
+                },
+                {
+                    "title": "METAL GEAR SOLID V: THE PHANTOM PAIN",
+                    "rating": 0.0,
+                    "status": "not_started",
+                    "platform": "PC",
+                    "genre": "Stealth",
+                    "date_added": "2026-01-25",
+                    "thumbnail": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/287700/header.jpg?t=1727849445"
+                }
+            ]
+        },
+        "The Witcher": {
+            "total_count": 3,
+            "games": [
+                {
+                    "title": "The Witcher 3: Wild Hunt",
+                    "rating": 10.0,
+                    "status": "completed",
+                    "platform": "PC",
+                    "genre": "RPG",
+                    "date_added": "2026-01-26",
+                    "thumbnail": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/292030/ad9240e088f953a84aee814034c50a6a92bf4516/header.jpg?t=1768303991"
+                }
+            ]
+        }
+    },
+    "singles": []
+}

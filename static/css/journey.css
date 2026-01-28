@@ -1,0 +1,377 @@
+/* --- Dashboard (Hero Section) --- */
+.dashboard-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 24px;
+    margin-bottom: 56px;
+}
+
+.stat-card {
+    border-radius: 28px; /* M3 Extra Large Shape */
+    padding: 24px;
+    height: 160px;
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.3s var(--motion-spring-bouncy);
+}
+
+.stat-card:hover { transform: translateY(-4px); }
+
+/* Tonal Palette Mapping */
+.stat-card.primary {
+    background-color: var(--md-sys-color-primary-container);
+    color: var(--md-sys-color-on-primary-container);
+}
+.stat-card.secondary {
+    background-color: var(--md-sys-color-secondary);
+    color: #1d1b24; /* Hardcoded dark for contrast on secondary */
+}
+.stat-card.tertiary {
+    background-color: var(--md-sys-color-tertiary);
+    color: #31111d; /* Hardcoded dark */
+}
+
+.stat-content {
+    display: flex;
+    flex-direction: column;
+    z-index: 2;
+}
+
+.stat-value {
+    font-family: 'Roboto Flex', sans-serif;
+    font-size: 56px;
+    font-weight: 300;
+    line-height: 1;
+    margin-bottom: 8px;
+}
+
+.stat-label {
+    font-size: 14px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    opacity: 0.8;
+}
+
+.stat-icon {
+    font-size: 48px;
+    width: 48px;
+    height: 48px;
+
+    opacity: 0.2;
+    position: absolute;
+    bottom: -10px;
+    right: -10px;
+    transform: rotate(-15deg) scale(2);
+
+    pointer-events: none;
+    user-select: none;
+}
+
+/* Circular Progress for Dashboard */
+.progress-circle {
+    width: 64px;
+    height: 64px;
+}
+.progress-circle svg {
+    width: 100%;
+    height: 100%;
+    transform: rotate(-90deg);
+}
+.circle-bg {
+    fill: none;
+    stroke: rgba(0,0,0,0.1);
+    stroke-width: 3.8;
+}
+.circle-fill {
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 3.8;
+    stroke-linecap: round;
+    animation: progress 1s ease-out forwards;
+}
+@keyframes progress {
+    from { stroke-dasharray: 0, 100; }
+}
+
+
+/* --- Dashboard styles (Оставляем из прошлого шага, если нужно) --- */
+/* ... (код dashboard-grid и stat-card остается прежним) ... */
+
+
+/* --- Rails Layout (New) --- */
+.rails-layout {
+    display: flex;
+    flex-direction: column;
+    gap: 32px; /* Отступ между карточками франшиз */
+    padding-bottom: 64px;
+}
+
+/* 1. Franchise Container (Card) */
+.franchise-rail-card {
+    background-color: var(--md-sys-color-surface-container-high);
+    border-radius: 28px; /* Expressive Shape */
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1); /* Subtle elevation */
+    overflow: hidden; /* Чтобы скругления не ломались */
+}
+
+/* Header */
+.rail-header {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.header-left {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.headline-small {
+    margin: 0;
+    font-family: 'Roboto Flex', sans-serif;
+    font-size: 24px;
+    font-weight: 500;
+    color: var(--md-sys-color-on-surface);
+}
+
+.count-badge {
+    background-color: var(--md-sys-color-primary-container);
+    color: var(--md-sys-color-on-primary-container);
+
+    border-radius: 100px;
+    padding: 6px 14px;
+    font-family: var(--font-family);
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 36px;
+    height: 28px;
+
+
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+/* Linear Progress Bar inside header */
+.rail-progress-bar {
+    position: relative;
+    /* Увеличиваем высоту контейнера до 20px, чтобы толстая волна влезла целиком */
+    height: 20px;
+    width: 100%;
+    background-color: transparent;
+    border-radius: 0;
+    overflow: hidden;
+}
+
+.rail-track,
+.rail-progress-fill {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    height: 100%;
+
+    --wave-pattern: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 50' preserveAspectRatio='none'%3E%3Cpath d='M 0 25 Q 25 10 50 25 T 100 25' fill='none' stroke='white' stroke-width='14' stroke-linecap='round' stroke-linejoin='round' /%3E%3C/svg%3E");
+
+    -webkit-mask-image: var(--wave-pattern);
+    mask-image: var(--wave-pattern);
+
+    /* Ширина одной волны 60px */
+    -webkit-mask-size: 60px 100%;
+    mask-size: 60px 100%;
+
+    -webkit-mask-repeat: repeat-x;
+    mask-repeat: repeat-x;
+
+    /* Сглаживание краев маски */
+    -webkit-mask-type: alpha;
+    mask-type: alpha;
+
+    animation: waveFlow 3s linear infinite;
+}
+
+.rail-track {
+    width: 100%;
+    background-color: var(--md-sys-color-surface-container-highest);
+    opacity: 0.4;
+    z-index: 1;
+}
+
+.rail-progress-fill {
+    background-color: var(--md-sys-color-primary);
+    z-index: 2;
+    transition: width 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+@keyframes waveFlow {
+    from {
+        -webkit-mask-position: 0 0;
+        mask-position: 0 0;
+    }
+    to {
+        -webkit-mask-position: -60px 0;
+        mask-position: -60px 0;
+    }
+}
+
+/* 2. Scroll Container */
+.rail-scroll-container {
+    display: flex;
+    gap: 20px; /* Расстояние между кружками */
+    overflow-x: auto;
+    padding-bottom: 12px; /* Место под скроллбар */
+    padding-left: 4px; /* Отступ для фокус-рингов */
+
+    /* Scroll Snap Logic */
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+
+    /* Скрываем скроллбар для чистоты (опционально) */
+    scrollbar-width: thin;
+    scrollbar-color: var(--md-sys-color-outline) transparent;
+}
+
+/* Стилизация скроллбара Webkit */
+.rail-scroll-container::-webkit-scrollbar {
+    height: 6px;
+}
+.rail-scroll-container::-webkit-scrollbar-thumb {
+    background-color: var(--md-sys-color-surface-container-highest);
+    border-radius: 3px;
+}
+
+/* 3. Game Bubble Wrapper */
+.game-bubble-wrapper {
+    flex: 0 0 auto;
+    width: 140px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    scroll-snap-align: start;
+    cursor: pointer;
+}
+
+/* 4. The Game Bubble (Circle) */
+.game-bubble {
+    width: 140px;
+    height: 70px;
+    border-radius: 16px;
+    position: relative;
+    overflow: visible;
+    border: 2px solid var(--md-sys-color-outline-variant);
+    background-color: var(--md-sys-color-surface-container);
+    transition: transform 0.3s var(--motion-spring-bouncy),
+                border-color 0.3s;
+}
+
+.game-bubble img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 14px;
+    display: block;
+    transition: filter 0.3s, opacity 0.3s;
+}
+
+/* --- Status Logic --- */
+
+/* Not Completed (Default) */
+.game-bubble:not(.status-completed) img {
+    filter: grayscale(100%);
+    opacity: 0.6;
+}
+
+/* Completed State */
+.game-bubble.status-completed {
+    border-color: var(--md-sys-color-primary); /* Акцентная обводка */
+    border-width: 3px;
+}
+
+/* Hover Effects (Interactive) */
+.game-bubble-wrapper:hover .game-bubble {
+    transform: scale(1.1); /* Увеличение */
+    border-color: var(--md-sys-color-primary); /* Подсветка границы */
+    z-index: 2;
+}
+
+.game-bubble-wrapper:hover .game-bubble img {
+    filter: grayscale(0%); /* Возврат цвета */
+    opacity: 1;
+}
+
+/* 5. Status Badge (Icon) */
+.status-badge-icon {
+    position: absolute;
+    bottom: -6px;
+    right: -6px;
+    width: 24px;
+    height: 24px;
+    background-color: var(--md-sys-color-primary);
+    color: var(--md-sys-color-on-primary);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 3px solid var(--md-sys-color-surface-container-high); /* Обводка цветом фона карточки */
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+    z-index: 3;
+
+    /* Анимация появления */
+    animation: popIn 0.4s var(--motion-spring-bouncy);
+}
+.status-badge-icon span { font-size: 16px; font-weight: bold; }
+
+@keyframes popIn {
+    from { transform: scale(0); }
+    to { transform: scale(1); }
+}
+
+/* No Image Placeholder */
+.no-image-pattern-round {
+    width: 100%; height: 100%; border-radius: 50%;
+    background: radial-gradient(circle, var(--md-sys-color-surface-container-highest), var(--md-sys-color-surface));
+}
+
+/* 6. Text Labels */
+.game-label {
+    font-size: 12px;
+    font-weight: 500;
+    text-align: center;
+    color: var(--md-sys-color-on-surface);
+    line-height: 1.2;
+
+    /* Обрезка текста до 2 строк */
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    width: 100%;
+}
+
+.game-year {
+    font-size: 10px;
+    color: var(--md-sys-color-on-surface-variant);
+    margin-top: -4px;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+    .franchise-rail-card { padding: 16px; border-radius: 20px; }
+    .game-bubble { width: 80px; height: 80px; }
+    .game-bubble-wrapper { width: 80px; }
+    .status-badge-icon { width: 24px; height: 24px; }
+    .status-badge-icon span { font-size: 14px; }
+}
