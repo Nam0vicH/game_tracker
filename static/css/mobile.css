@@ -376,25 +376,24 @@
         flex-shrink: 0;
         margin-left: 0;
     }
-}
 
-/* Альтернатива: Плавающие полупрозрачные кнопки сбоку */
-.nav-footer {
-    position: fixed;
-    bottom: 100px; /* Над нижним меню */
-    left: 16px;
-    z-index: 900;
+    /* Альтернатива: Плавающие полупрозрачные кнопки сбоку */
+    .nav-footer {
+            position: fixed;
+            bottom: 100px;
+            right: 16px;
+            z-index: 900;
+            margin-top: 0;
+            flex-direction: column;
+            backdrop-filter: none;
+            background-color: rgba(43, 40, 49);
+            border-radius: 30px;
+            padding: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+        }
 
-    /* Сброс стилей контейнера */
-    margin-top: 0;
-    flex-direction: column;
-    background-color: rgba(0, 0, 0, 0.6); /* Полупрозрачная подложка */
-    backdrop-filter: blur(4px);
-    border-radius: 30px;
-    padding: 8px;
-}
-
-.nav-icon-btn {
-    width: 40px;
-    height: 40px;
+    .nav-icon-btn {
+        width: 40px;
+        height: 40px;
+    }
 }
