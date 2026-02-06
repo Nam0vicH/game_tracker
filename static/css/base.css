@@ -368,3 +368,58 @@ body {
     width: calc(100% - 120px);
     padding: 32px 48px;
 }
+
+/* 1. Добавляем нижний блок в навигацию */
+.nav-footer {
+    margin-top: auto; /* Это магия Flexbox: прижимает блок к низу контейнера */
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding-bottom: 8px; /* Небольшой отступ от низа пилюли */
+}
+
+/* 2. Стили кнопок скролла (M3 Icon Button) */
+.nav-icon-btn {
+    width: 48px;  /* Стандартный размер тач-таргета M3 */
+    height: 48px;
+    border-radius: 50%; /* Круглые кнопки */
+    border: none;
+    background-color: transparent; /* Прозрачный фон (Standard Icon Button) */
+    color: var(--md-sys-color-on-surface-variant);
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+
+    transition:
+        background-color 0.2s ease,
+        color 0.2s ease,
+        transform 0.2s var(--motion-spring-bouncy);
+}
+
+/* Иконки внутри кнопок */
+.nav-icon-btn .material-symbols-rounded {
+    font-size: 24px;
+}
+
+/* Hover эффект (State Layer) */
+.nav-icon-btn:hover {
+    background-color: rgba(230, 225, 229, 0.08); /* Светлая подложка */
+    color: var(--md-sys-color-on-surface); /* Цвет становится ярче */
+    transform: scale(1.1); /* Легкое увеличение */
+}
+
+/* Active эффект (нажатие) */
+.nav-icon-btn:active {
+    background-color: rgba(230, 225, 229, 0.12);
+    transform: scale(0.95);
+}
+
+.nav-icon-btn {
+    background-color: var(--md-sys-color-surface-container-highest);
+}
+.nav-icon-btn:hover {
+    background-color: var(--md-sys-color-secondary);
+    color: var(--md-sys-color-on-secondary);
+}

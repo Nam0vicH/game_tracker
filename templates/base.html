@@ -5,6 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>M3 Expressive Library</title>
 
+    <!-- ico -->
+    <link rel="icon" type="image/png" href="{{ url_for('static', filename='img/logo.png') }}">
+
     <!-- Google Fonts: Roboto Flex (Variable Font) is crucial for Expressive Typography -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -66,6 +69,17 @@
                     <span class="label">Settings</span>
                 </a>
             </div>
+
+            <div class="nav-footer">
+                <button class="nav-icon-btn" onclick="window.scrollTo({ top: 0, behavior: 'smooth' })" title="Up">
+                    <span class="material-symbols-rounded">arrow_upward</span>
+                </button>
+
+                <button class="nav-icon-btn" onclick="window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' })" title="Down">
+                    <span class="material-symbols-rounded">arrow_downward</span>
+                </button>
+            </div>
+
         </div>
     </nav>
 

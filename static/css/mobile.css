@@ -377,3 +377,24 @@
         margin-left: 0;
     }
 }
+
+/* Альтернатива: Плавающие полупрозрачные кнопки сбоку */
+.nav-footer {
+    position: fixed;
+    bottom: 100px; /* Над нижним меню */
+    left: 16px;
+    z-index: 900;
+
+    /* Сброс стилей контейнера */
+    margin-top: 0;
+    flex-direction: column;
+    background-color: rgba(0, 0, 0, 0.6); /* Полупрозрачная подложка */
+    backdrop-filter: blur(4px);
+    border-radius: 30px;
+    padding: 8px;
+}
+
+.nav-icon-btn {
+    width: 40px;
+    height: 40px;
+}
