@@ -2,29 +2,6 @@
 
 {% block page_css %}
     <link rel="stylesheet" href="{{ url_for('static', filename='css/journey.css') }}">
-    <style>
-        .franchise-rail-card {
-            content-visibility: auto;
-            contain-intrinsic-size: 1px 220px;
-        }
-
-        .rail-scroll-container {
-            /* Подсказка браузеру для плавного скролла */
-            will-change: transform, scroll-position;
-        }
-
-        /* --- Обработка битых картинок (заглушки) --- */
-        .game-bubble.image-error img {
-            display: none;
-        }
-        .game-bubble.image-error .no-image-pattern-round {
-            display: block !important;
-        }
-
-        .game-bubble img + .no-image-pattern-round {
-            display: none;
-        }
-    </style>
 {% endblock %}
 
 {% block content %}

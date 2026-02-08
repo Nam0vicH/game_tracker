@@ -810,6 +810,49 @@ img[src=""], img:not([src]) { opacity: 0; }
     transform: rotate(180deg);
 }
 
+
+.franchise-group {
+    /* Браузер не будет отрисовывать контент, пока он не попадет во viewport.
+       Это колоссально снижает нагрузку при загрузке страницы. */
+    content-visibility: auto;
+    /* Примерная высота блока, чтобы скроллбар не прыгал (заголовок + 1 ряд карточек) */
+    contain-intrinsic-size: 1px 300px;
+}
+
+.franchise-group .cards-grid-wrapper {
+    display: grid;
+    grid-template-rows: 1fr;
+    /* will-change подсказывает браузеру подготовить GPU */
+    will-change: grid-template-rows;
+    transition: grid-template-rows 0.3s var(--motion-spring-slow);
+}
+
+.franchise-group.is-collapsed .cards-grid-wrapper {
+    grid-template-rows: 0fr;
+}
+
+.franchise-group .cards-grid {
+    overflow: hidden;
+    min-height: 0;
+}
+
+.franchise-group.is-collapsed .divider {
+    opacity: 0.5;
+}
+
+/* Класс для скрытия битых картинок (добавляется через JS/onerror) */
+.card-media.image-error img {
+    display: none;
+}
+.card-media.image-error .no-image-pattern {
+    display: block !important; /* Принудительно показываем паттерн */
+}
+
+/* Скрываем паттерн по умолчанию, если есть картинка */
+.card-media img + .no-image-pattern {
+    display: none;
+}
+
 /* Текст заголовка */
 .title-large {
     font-family: 'Roboto Flex', sans-serif;

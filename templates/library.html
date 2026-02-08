@@ -2,49 +2,6 @@
 
 {% block page_css %}
     <link rel="stylesheet" href="{{ url_for('static', filename='css/library.css') }}">
-    <style>
-        .franchise-group {
-            /* Браузер не будет отрисовывать контент, пока он не попадет во viewport.
-               Это колоссально снижает нагрузку при загрузке страницы. */
-            content-visibility: auto;
-            /* Примерная высота блока, чтобы скроллбар не прыгал (заголовок + 1 ряд карточек) */
-            contain-intrinsic-size: 1px 300px;
-        }
-
-        .franchise-group .cards-grid-wrapper {
-            display: grid;
-            grid-template-rows: 1fr;
-            /* will-change подсказывает браузеру подготовить GPU */
-            will-change: grid-template-rows;
-            transition: grid-template-rows 0.3s var(--motion-spring-slow);
-        }
-
-        .franchise-group.is-collapsed .cards-grid-wrapper {
-            grid-template-rows: 0fr;
-        }
-
-        .franchise-group .cards-grid {
-            overflow: hidden;
-            min-height: 0;
-        }
-
-        .franchise-group.is-collapsed .divider {
-            opacity: 0.5;
-        }
-
-        /* Класс для скрытия битых картинок (добавляется через JS/onerror) */
-        .card-media.image-error img {
-            display: none;
-        }
-        .card-media.image-error .no-image-pattern {
-            display: block !important; /* Принудительно показываем паттерн */
-        }
-
-        /* Скрываем паттерн по умолчанию, если есть картинка */
-        .card-media img + .no-image-pattern {
-            display: none;
-        }
-    </style>
 {% endblock %}
 
 {% block content %}
@@ -97,7 +54,9 @@
 
     <div class="feed-layout" id="libraryFeed">
 
-        {% macro render_section(title, games_list, count, is_franchise=True) %}
+        {% set ns = namespace(global_card_index=0) %}
+
+    {% macro render_section(title, games_list, count, is_franchise=True) %}
         <section class="franchise-group" data-franchise-name="{{ title }}">
 
             <div class="group-header" onclick="toggleSection(this)">
@@ -130,9 +89,11 @@
                                 {% if game.thumbnail %}
                                     <img src="{{ game.thumbnail }}"
                                          alt="{{ game.title }}"
-                                         loading="lazy"
+                                         width="480" height="240"
+                                         {% if ns.global_card_index < 4 %}fetchpriority="high"{% else %}loading="lazy"{% endif %}
                                          decoding="async"
                                          onerror="this.parentElement.classList.add('image-error')">
+                                    {% set ns.global_card_index = ns.global_card_index + 1 %}
 
                                     <!-- Заглушка (скрыта CSS-ом, пока картинка жива) -->
                                     <div class="no-image-pattern"></div>
@@ -208,7 +169,7 @@
 
     </div>
 
-    <!-- Edit Dialog (Optimized: hidden by default is standard) -->
+    <!-- Edit Dialog -->
     <dialog id="editDialog" class="m3-dialog">
         <form method="dialog" class="dialog-form" id="editForm">
             <div class="dialog-header">
@@ -217,7 +178,8 @@
             </div>
             <div class="dialog-body split-layout">
                 <div class="inputs-column">
-                    <div class="m3-field filled" id="franchiseSelectWrapper" style="display: none;">
+                    <!-- Cleaned: Inline style removed, handle in CSS -->
+                    <div class="m3-field filled" id="franchiseSelectWrapper">
                         <select id="inputFranchise" name="franchise">
                             <option value="">— Отдельная игра —</option>
                             {% for franchise_name in data.franchises.keys() %}

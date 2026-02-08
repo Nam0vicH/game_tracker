@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="_Слой_2" data-name="Слой 2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 75.94 100.55">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #291d16;
+      }
+
+      .cls-2 {
+        fill: #d7c2b8;
+      }
+    </style>
+  </defs>
+  <g id="_Слой_1-2" data-name="Слой 1">
+    <g>
+      <path class="cls-1" d="M.17,94.72L0,4.94S.61.05,5.11.05h54.89s1.22-.39,2.67.94,11.72,11.39,11.72,11.39c0,0,1.61,1.28,1.5,3.89s.06,12.33.06,12.33h-3.89v7.67h3.83v58.44s.33,5.83-5.83,5.83H5.5s-5.32.06-5.33-5.83Z"/>
+      <rect class="cls-2" x=".04" y="32.28" width="4.11" height="14.56"/>
+      <rect class="cls-2" x="7.29" y="10.66" width="5.83" height="12.83"/>
+      <rect class="cls-2" x="16.29" y="5.16" width="5.72" height="12.89"/>
+      <rect class="cls-2" x="25.35" y="5.16" width="5.72" height="12.89"/>
+      <rect class="cls-2" x="34.4" y="5.16" width="5.72" height="12.89"/>
+      <rect class="cls-2" x="43.46" y="5.16" width="5.72" height="12.89"/>
+      <rect class="cls-2" x="52.4" y="5.16" width="5.72" height="12.89"/>
+      <rect class="cls-2" x="10.56" y="32.28" width="54.86" height="50.44" rx="4" ry="4"/>
+      <polygon class="cls-1" points="19.74 58.66 25.01 53.39 32.68 61.05 50.9 42.83 56.4 48.33 33.01 71.72 19.74 58.66"/>
+    </g>
+  </g>
+</svg>

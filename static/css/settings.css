@@ -1,0 +1,264 @@
+/*
+ * Settings Page Refactored Styles
+ */
+
+/* --- Container & Layout --- */
+
+.settings-container {
+    /* Box Model */
+    max-width: 900px;
+    margin: 0 auto;
+
+    /* Visuals */
+    /* Небольшая анимация появления контента */
+    animation: fadeIn 0.4s ease-out;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.settings-grid {
+    /* Layout */
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 24px;
+}
+
+/* --- Typography --- */
+
+h1 {
+    /* Box Model */
+    margin-bottom: 32px;
+
+    /* Typography */
+    font-size: 32px;
+    font-weight: 600;
+    color: var(--md-sys-color-on-surface);
+}
+
+/* --- M3 Card Style --- */
+
+.settings-card {
+    /* Layout */
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+
+    /* Box Model */
+    padding: 24px;
+
+    /* Visuals */
+    background-color: var(--md-sys-color-surface-container-high);
+    border-radius: var(--shape-corner-large);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.card-header h2 {
+    /* Typography */
+    font-size: 20px;
+    font-weight: 500;
+    color: var(--md-sys-color-on-surface);
+}
+
+.card-header p {
+    /* Box Model */
+    margin-top: 4px;
+
+    /* Typography */
+    font-size: 14px;
+    color: var(--md-sys-color-on-surface-variant);
+}
+
+/* --- Theme Swatches --- */
+
+.swatch-grid {
+    /* Layout */
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+}
+
+.theme-swatch {
+    /* Layout */
+    position: relative;
+
+    /* Box Model */
+    width: 48px;
+    height: 48px;
+
+    /* Visuals */
+    border-radius: 50%;
+    cursor: pointer;
+    transition: transform 0.3s var(--motion-spring-bouncy), border-color 0.2s;
+}
+
+/* Swatch Gradients (Extracted from HTML) */
+.theme-swatch[data-theme="violet"] {
+    background: linear-gradient(135deg, #d0bcff 0%, #4f378b 100%);
+}
+
+.theme-swatch[data-theme="ocean"] {
+    background: linear-gradient(135deg, #a8eff0 0%, #004a77 100%);
+}
+
+.theme-swatch[data-theme="emerald"] {
+    background: linear-gradient(135deg, #baffc9 0%, #0c6a38 100%);
+}
+
+.theme-swatch[data-theme="volcanic"] {
+    background: linear-gradient(135deg, #ffb4ab 0%, #93000a 100%);
+}
+
+.theme-swatch:hover {
+    /* Visuals */
+    transform: scale(1.1);
+}
+
+.theme-swatch.active {
+    /* Visuals */
+    border-color: var(--md-sys-color-on-surface);
+    transform: scale(1.1);
+}
+
+.theme-swatch::after {
+    /* Layout */
+    content: 'check';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+
+    /* Typography */
+    font-family: 'Material Symbols Rounded';
+    font-weight: 700;
+    color: white;
+
+    /* Visuals */
+    transform: translate(-50%, -50%) scale(0);
+    transition: transform 0.2s var(--motion-spring-bouncy);
+}
+
+.theme-swatch.active::after {
+    /* Visuals */
+    transform: translate(-50%, -50%) scale(1);
+}
+
+/* --- Custom Color Picker --- */
+
+.color-picker-wrapper {
+    /* Layout */
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+#hexValueLabel {
+    /* Typography */
+    font-family: monospace;
+    color: var(--md-sys-color-on-surface);
+
+    /* Visuals */
+    opacity: 0.7;
+}
+
+input[type="color"] {
+    /* Layout */
+    overflow: hidden;
+
+    /* Box Model */
+    width: 64px;
+    height: 40px;
+    padding: 0;
+    border: none;
+
+    /* Visuals */
+    -webkit-appearance: none;
+    border-radius: 20px;
+    box-shadow: 0 0 0 1px var(--md-sys-color-outline);
+    cursor: pointer;
+}
+
+input[type="color"]::-webkit-color-swatch-wrapper {
+    padding: 0;
+}
+
+input[type="color"]::-webkit-color-swatch {
+    border: none;
+}
+
+/* --- Segmented Button --- */
+
+.segmented-group {
+    /* Layout */
+    display: flex;
+    overflow: hidden;
+
+    /* Box Model */
+    height: 40px;
+    border: 1px solid var(--md-sys-color-outline);
+
+    /* Visuals */
+    border-radius: 20px;
+}
+
+.segment-btn {
+    /* Layout */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex: 1;
+    gap: 8px;
+
+    /* Box Model */
+    border: none;
+    border-right: 1px solid var(--md-sys-color-outline);
+
+    /* Typography */
+    font-family: var(--font-family);
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--md-sys-color-on-surface-variant);
+
+    /* Visuals */
+    background: transparent;
+    cursor: pointer;
+    transition: background-color 0.2s, color 0.2s;
+}
+
+.segment-btn:last-child {
+    /* Box Model */
+    border-right: none;
+}
+
+.segment-btn:hover {
+    /* Visuals */
+    background-color: rgba(255, 255, 255, 0.05);
+}
+
+.segment-btn.active {
+    /* Typography */
+    color: #1d1b24; /* on-secondary fixed color */
+
+    /* Visuals */
+    background-color: var(--md-sys-color-secondary);
+}
+
+.segment-btn .material-symbols-rounded {
+    /* Layout */
+    display: none;
+
+    /* Typography */
+    font-size: 18px;
+}
+
+.segment-btn.active .material-symbols-rounded {
+    /* Layout */
+    display: inline-block;
+}

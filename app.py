@@ -5,6 +5,22 @@ from flask import Flask, render_template, request, jsonify
 app = Flask(__name__)
 
 DATA_FILE = os.path.join(os.path.dirname(__file__), 'data', 'games_data.json')
+THEME_JS_FILE = os.path.join(os.path.dirname(__file__), 'static', 'js', 'theme.js')
+
+# Cache theme.js content for inlining into templates (avoids render-blocking script)
+_theme_js_cache = None
+
+def get_theme_js():
+    global _theme_js_cache
+    if _theme_js_cache is None or app.debug:
+        with open(THEME_JS_FILE, 'r', encoding='utf-8') as f:
+            _theme_js_cache = f.read()
+    return _theme_js_cache
+
+
+@app.context_processor
+def inject_theme_js():
+    return dict(theme_js=get_theme_js())
 
 
 def load_library():
