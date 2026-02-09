@@ -98,6 +98,27 @@ def journey():
 def settings():
     return render_template('settings.html')
 
+@app.route('/picker')
+def picker():
+    data = load_library()
+
+    # Собираем все игры в один плоский список для JS
+    all_games = []
+
+    # Добавляем игры из франшиз
+    for franchise_name, f_data in data.get('franchises', {}).items():
+        for game in f_data.get('games', []):
+            # Добавляем имя франшизы в объект игры для отображения
+            game_copy = game.copy()
+            game_copy['franchise_name'] = franchise_name
+            all_games.append(game_copy)
+
+    # Добавляем одиночные игры
+    for game in data.get('singles', []):
+        all_games.append(game)
+
+    return render_template('picker.html', games=all_games)
+
 @app.route('/api/update', methods=['POST'])
 def update_game():
     """API endpoint для обновления данных игры"""

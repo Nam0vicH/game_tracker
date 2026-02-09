@@ -27,15 +27,6 @@
                     "thumbnail": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/12110/header.jpg?t=1634144465"
                 },
                 {
-                    "title": "Grand Theft Auto: San Andreas",
-                    "rating": 8.5,
-                    "status": "completed",
-                    "date_added": "2026-01-25",
-                    "platform": "PC",
-                    "genre": "Action",
-                    "thumbnail": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/12120/capsule_231x87.jpg?t=1747175350"
-                },
-                {
                     "title": "Grand Theft Auto V",
                     "rating": 0.0,
                     "status": "on_hold",
@@ -52,6 +43,15 @@
                     "platform": "PC",
                     "genre": "Action",
                     "thumbnail": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/12210/header.jpg?t=1721061564"
+                },
+                {
+                    "title": "Grand Theft Auto: San Andreas",
+                    "rating": 8.5,
+                    "status": "completed",
+                    "date_added": "2026-01-25",
+                    "platform": "PC",
+                    "genre": "Action",
+                    "thumbnail": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/12120/header.jpg?t=1634144450"
                 }
             ]
         },
@@ -386,9 +386,411 @@
                     "genre": "RPG",
                     "date_added": "2026-01-26",
                     "thumbnail": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/292030/ad9240e088f953a84aee814034c50a6a92bf4516/header.jpg?t=1768303991"
+                },
+                {
+                    "title": "The Witcher 2: Assassins of Kings Enhanced Edition",
+                    "rating": 9.0,
+                    "status": "completed",
+                    "platform": "PC",
+                    "genre": "RPG",
+                    "date_added": "2026-02-08",
+                    "thumbnail": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/20920/header.jpg?t=1761657279"
+                },
+                {
+                    "title": "The Witcher: Enhanced Edition Director's Cut",
+                    "rating": 8.5,
+                    "status": "completed",
+                    "platform": "PC",
+                    "genre": "RPG",
+                    "date_added": "2026-02-08",
+                    "thumbnail": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/20900/header.jpg?t=1749200362"
+                }
+            ]
+        },
+        "Devil May Cry": {
+            "total_count": 3,
+            "games": [
+                {
+                    "title": "Devil May Cry HD Collection",
+                    "rating": 0.0,
+                    "status": "playing",
+                    "platform": "PC",
+                    "genre": "Action",
+                    "date_added": "2026-02-08",
+                    "thumbnail": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/631510/header.jpg?t=1768869867"
+                },
+                {
+                    "title": "Devil May Cry 4 Special Edition",
+                    "rating": 0.0,
+                    "status": "not_started",
+                    "platform": "PC",
+                    "genre": "Action",
+                    "date_added": "2026-02-08",
+                    "thumbnail": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/329050/header.jpg?t=1768869714"
+                },
+                {
+                    "title": "Devil May Cry 5",
+                    "rating": 0.0,
+                    "status": "not_started",
+                    "platform": "PC",
+                    "genre": "Action",
+                    "date_added": "2026-02-08",
+                    "thumbnail": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/601150/header.jpg?t=1768869803"
+                }
+            ]
+        },
+        "Far Cry": {
+            "total_count": 5,
+            "games": [
+                {
+                    "title": "Far Cry 3",
+                    "rating": 8.5,
+                    "status": "completed",
+                    "platform": "PC",
+                    "genre": "Action",
+                    "date_added": "2026-02-08",
+                    "thumbnail": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/220240/header.jpg?t=1752169206"
+                },
+                {
+                    "title": "Far Cry 4",
+                    "rating": 0.0,
+                    "status": "not_started",
+                    "platform": "PC",
+                    "genre": "Action",
+                    "date_added": "2026-02-08",
+                    "thumbnail": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/298110/header.jpg?t=1764168324"
+                },
+                {
+                    "title": "Far Cry 5",
+                    "rating": 0.0,
+                    "status": "not_started",
+                    "platform": "PC",
+                    "genre": "Action",
+                    "date_added": "2026-02-08",
+                    "thumbnail": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/552520/header.jpg?t=1762190084"
+                }
+            ]
+        },
+        "Hollow Knight": {
+            "total_count": 2,
+            "games": [
+                {
+                    "title": "Hollow Knight",
+                    "rating": 0.0,
+                    "status": "not_started",
+                    "platform": "PC",
+                    "genre": "Platformer",
+                    "date_added": "2026-02-08",
+                    "thumbnail": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/367520/3c3489495136b26b34f8a9543c7f5645b99d388c/header.jpg?t=1770338567"
+                },
+                {
+                    "title": "Hollow Knight: Silksong",
+                    "rating": 0.0,
+                    "status": "not_started",
+                    "platform": "PC",
+                    "genre": "Platformer",
+                    "date_added": "2026-02-08",
+                    "thumbnail": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/1030300/7983574d464e6559ac7e24275727f73a8bcca1f3/header.jpg?t=1764916587"
+                }
+            ]
+        },
+        "Kingdom Come": {
+            "total_count": 2,
+            "games": [
+                {
+                    "title": "Kingdom Come: Deliverance",
+                    "rating": 9.0,
+                    "status": "completed",
+                    "platform": "PC",
+                    "genre": "RPG",
+                    "date_added": "2026-02-08",
+                    "thumbnail": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/379430/header.jpg?t=1762938039"
+                },
+                {
+                    "title": "Kingdom Come: Deliverance II",
+                    "rating": 10.0,
+                    "status": "completed",
+                    "platform": "PC",
+                    "genre": "RPG",
+                    "date_added": "2026-02-08",
+                    "thumbnail": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/1771300/header.jpg?t=1769507535"
+                }
+            ]
+        },
+        "Silent Hill": {
+            "total_count": 2,
+            "games": [
+                {
+                    "title": "SILENT HILL f",
+                    "rating": 0.0,
+                    "status": "dropped",
+                    "platform": "PC",
+                    "genre": "Horror",
+                    "date_added": "2026-02-08",
+                    "thumbnail": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/2947440/7e5d923ac622bd1775ebc9b5d4b5b0a24bf5ed40/header.jpg?t=1770169624"
+                },
+                {
+                    "title": "SILENT HILL 2",
+                    "rating": 9.0,
+                    "status": "completed",
+                    "platform": "PC",
+                    "genre": "Horror",
+                    "date_added": "2026-02-08",
+                    "thumbnail": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/2124490/header.jpg?t=1744248682"
+                }
+            ]
+        },
+        "Tomb Raider": {
+            "total_count": 3,
+            "games": [
+                {
+                    "title": "Shadow of the Tomb Raider",
+                    "rating": 0.0,
+                    "status": "not_started",
+                    "platform": "PC",
+                    "genre": "Adventure",
+                    "date_added": "2026-02-08",
+                    "thumbnail": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/750920/header.jpg?t=1765239925"
+                },
+                {
+                    "title": "Tomb Raider Game of the Year",
+                    "rating": 8.5,
+                    "status": "completed",
+                    "platform": "PC",
+                    "genre": "Adventure",
+                    "date_added": "2026-02-08",
+                    "thumbnail": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/203160/9e67774e97cdd155f287146e62611eb445514ac6/header.jpg?t=1765220424"
+                },
+                {
+                    "title": "Rise of the Tomb Raider",
+                    "rating": 8.0,
+                    "status": "completed",
+                    "platform": "PC",
+                    "genre": "Adventure",
+                    "date_added": "2026-02-08",
+                    "thumbnail": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/391220/header.jpg?t=1766187095"
+                }
+            ]
+        },
+        "BioShock": {
+            "total_count": 3,
+            "games": [
+                {
+                    "title": "BioShock 2",
+                    "rating": 0.0,
+                    "status": "not_started",
+                    "platform": "PC",
+                    "genre": "Action",
+                    "date_added": "2026-02-08",
+                    "thumbnail": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/8850/header.jpg?t=1730174099"
+                },
+                {
+                    "title": "BioShock",
+                    "rating": 8.0,
+                    "status": "completed",
+                    "platform": "PC",
+                    "genre": "Action",
+                    "date_added": "2026-02-08",
+                    "thumbnail": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/7670/header.jpg?t=1730172622"
+                },
+                {
+                    "title": "BioShock Infinite",
+                    "rating": 0.0,
+                    "status": "not_started",
+                    "platform": "PC",
+                    "genre": "Action",
+                    "date_added": "2026-02-08",
+                    "thumbnail": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/8870/header.jpg?t=1728673518"
+                }
+            ]
+        },
+        "A Plague Tale": {
+            "total_count": 2,
+            "games": [
+                {
+                    "title": "A Plague Tale: Innocence",
+                    "rating": 9.0,
+                    "status": "completed",
+                    "platform": "PC",
+                    "genre": "Adventure",
+                    "date_added": "2026-02-08",
+                    "thumbnail": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/752590/header.jpg?t=1727793332"
+                },
+                {
+                    "title": "A Plague Tale: Requiem",
+                    "rating": 9.0,
+                    "status": "completed",
+                    "platform": "PC",
+                    "genre": "Adventure",
+                    "date_added": "2026-02-08",
+                    "thumbnail": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/1182900/header.jpg?t=1761846087"
+                }
+            ]
+        },
+        "Metro": {
+            "total_count": 3,
+            "games": [
+                {
+                    "title": "Metro 2033 Redux",
+                    "rating": 8.0,
+                    "status": "completed",
+                    "platform": "PC",
+                    "genre": "Action",
+                    "date_added": "2026-02-08",
+                    "thumbnail": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/43110/header.jpg?t=1709655393"
+                },
+                {
+                    "title": "Metro Exodus",
+                    "rating": 8.0,
+                    "status": "completed",
+                    "platform": "PC",
+                    "genre": "Action",
+                    "date_added": "2026-02-08",
+                    "thumbnail": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/412020/header.jpg?t=1750772804"
+                },
+                {
+                    "title": "Metro: Last Light Redux",
+                    "rating": 8.0,
+                    "status": "completed",
+                    "platform": "PC",
+                    "genre": "Action",
+                    "date_added": "2026-02-08",
+                    "thumbnail": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/287390/header.jpg?t=1725444535"
+                }
+            ]
+        },
+        "Alan Wake": {
+            "total_count": 2,
+            "games": [
+                {
+                    "title": "Alan Wake",
+                    "rating": 8.5,
+                    "status": "completed",
+                    "platform": "PC",
+                    "genre": "Horror",
+                    "date_added": "2026-02-09",
+                    "thumbnail": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/108710/9c1728f937c2a7e632b447b02e442f6a5d88515c/header.jpg?t=1769717716"
                 }
             ]
         }
     },
-    "singles": []
+    "singles": [
+        {
+            "title": "Cronos: The New Dawn",
+            "rating": 0.0,
+            "status": "dropped",
+            "platform": "PC",
+            "genre": "Horror",
+            "date_added": "2026-02-08",
+            "thumbnail": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/2101960/68fa7b72da253c498b70cf74e475b4f5f4ac79eb/header.jpg?t=1769789138"
+        },
+        {
+            "title": "Cult of the Lamb",
+            "rating": 8.5,
+            "status": "dropped",
+            "platform": "PC",
+            "genre": "Base Building",
+            "date_added": "2026-02-08",
+            "thumbnail": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/1313140/19f32bb477a6e9d058e05193b4e282149bd70644/header.jpg?t=1769836674"
+        },
+        {
+            "title": "Cuphead",
+            "rating": 9.0,
+            "status": "completed",
+            "platform": "PC",
+            "genre": "Platformer",
+            "date_added": "2026-02-08",
+            "thumbnail": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/268910/header.jpg?t=1709068852"
+        },
+        {
+            "title": "Cyberpunk 2077",
+            "rating": 9.0,
+            "status": "completed",
+            "platform": "PC",
+            "genre": "RPG",
+            "date_added": "2026-02-08",
+            "thumbnail": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/1091500/e9047d8ec47ae3d94bb8b464fb0fc9e9972b4ac7/header.jpg?t=1769690377"
+        },
+        {
+            "title": "Dispatch",
+            "rating": 9.0,
+            "status": "completed",
+            "platform": "PC",
+            "genre": "Choices Matter",
+            "date_added": "2026-02-08",
+            "thumbnail": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/2592160/header.jpg?t=1767817184"
+        },
+        {
+            "title": "Heavy Rain",
+            "rating": 0.0,
+            "status": "on_hold",
+            "platform": "PC",
+            "genre": "Choices Matter",
+            "date_added": "2026-02-08",
+            "thumbnail": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/960910/header.jpg?t=1675271942"
+        },
+        {
+            "title": "Detroit: Become Human",
+            "rating": 9.0,
+            "status": "completed",
+            "platform": "PC",
+            "genre": "Choices Matter",
+            "date_added": "2026-02-08",
+            "thumbnail": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/1222140/header.jpg?t=1667468479"
+        },
+        {
+            "title": "Hogwarts Legacy",
+            "rating": 0.0,
+            "status": "not_started",
+            "platform": "PC",
+            "genre": "Adventure",
+            "date_added": "2026-02-08",
+            "thumbnail": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/990080/a3cdc6f40d97df8ac993679c2dd1edeb5222421e/header.jpg?t=1765473525"
+        },
+        {
+            "title": "Indiana Jones and the Great Circle",
+            "rating": 8.0,
+            "status": "completed",
+            "platform": "PC",
+            "genre": "Action-Adventure",
+            "date_added": "2026-02-08",
+            "thumbnail": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/2677660/151ae5a881f05ef630defef85d99b38146b7055c/header.jpg?t=1763745007"
+        },
+        {
+            "title": "INDIKA",
+            "rating": 8.0,
+            "status": "completed",
+            "platform": "PC",
+            "genre": "Horror",
+            "date_added": "2026-02-08",
+            "thumbnail": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/1373960/header.jpg?t=1765218123"
+        },
+        {
+            "title": "L.A. Noire",
+            "rating": 0.0,
+            "status": "on_hold",
+            "platform": "PC",
+            "genre": "Detective",
+            "date_added": "2026-02-08",
+            "thumbnail": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/110800/header.jpg?t=1741117102"
+        },
+        {
+            "title": "Control Ultimate Edition",
+            "rating": 7.5,
+            "status": "completed",
+            "platform": "PC",
+            "genre": "Action",
+            "date_added": "2026-02-08",
+            "thumbnail": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/870780/ec621653454cdad232187af4eb79f23c05aceca5/header.jpg?t=1769413914"
+        },
+        {
+            "title": "The Wolf Among Us",
+            "rating": 9.5,
+            "status": "completed",
+            "platform": "PC",
+            "genre": "Story Rich",
+            "date_added": "2026-02-08",
+            "thumbnail": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/250320/header.jpg?t=1734104991"
+        }
+    ]
 }

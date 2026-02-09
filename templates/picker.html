@@ -1,0 +1,79 @@
+{% extends "base.html" %}
+
+{% block page_css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/picker.css') }}">
+{% endblock %}
+
+{% block content %}
+<!-- Динамический размытый фон -->
+<div class="picker-background" id="pickerBackground"></div>
+<div class="picker-overlay"></div>
+
+<div class="picker-container">
+    <div class="picker-header">
+        <h1 class="display-medium">Рулетка</h1>
+
+        <!-- Фильтры (Chips) -->
+        <div class="filters-row">
+            <label class="filter-chip active" id="filter-not_started">
+                <input type="checkbox" checked value="not_started">
+                <span class="material-symbols-rounded">bookmark</span>
+                В планах
+            </label>
+            <label class="filter-chip active" id="filter-on_hold">
+                <input type="checkbox" checked value="on_hold">
+                <span class="material-symbols-rounded">pause_circle</span>
+                На паузе
+            </label>
+            <label class="filter-chip" id="filter-dropped">
+                <input type="checkbox" value="dropped">
+                <span class="material-symbols-rounded">delete</span>
+                Брошено
+            </label>
+        </div>
+    </div>
+
+    <!-- Сцена с карточкой -->
+    <div class="roulette-stage">
+        <div class="game-poster-card" id="pickerCard">
+            <!-- Пустое состояние -->
+            <div class="poster-placeholder">
+                <span class="material-symbols-rounded icon-giant">casino</span>
+                <span class="headline-small">Испытай удачу</span>
+            </div>
+
+            <!-- Состояние результата -->
+            <div class="poster-content hidden">
+                <div class="poster-image">
+                    <img id="resultImage" src="" alt="Cover">
+                    <div class="poster-gradient"></div>
+                </div>
+
+                <div class="poster-info">
+                    <div class="poster-meta">
+                        <span class="meta-badge" id="resultPlatform">PC</span>
+                        <span class="meta-badge" id="resultGenre">Action</span>
+                    </div>
+                    <span class="franchise-label" id="resultFranchise"></span>
+                    <h2 class="game-title" id="resultTitle">Game Title</h2>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Кнопка действия -->
+    <div class="actions-area">
+        <button class="roll-btn" id="rollBtn">
+            <span class="material-symbols-rounded">refresh</span>
+            <span>КРУТИТЬ</span>
+        </button>
+    </div>
+</div>
+{% endblock %}
+
+{% block page_js %}
+<script>
+    const ALL_GAMES = {{ games | tojson }};
+</script>
+<script src="{{ url_for('static', filename='js/picker.js') }}"></script>
+{% endblock %}

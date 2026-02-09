@@ -1,0 +1,349 @@
+/* --- Layout --- */
+.picker-container {
+    position: relative;
+    z-index: 2;
+    padding: 2rem 1rem;
+    min-height: calc(100vh - 80px); /* Учитываем навбар */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.picker-header {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.picker-header h1 {
+    margin: 0;
+    color: var(--md-sys-color-on-surface);
+}
+
+/* --- M3 Filter Chips (Строгий стиль) --- */
+.filters-row {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.filter-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    height: 32px;
+    padding: 0 16px;
+    border-radius: 8px; /* M3 small corners */
+
+    /* Дефолтное состояние (неактивно) */
+    background-color: transparent;
+    border: 1px solid var(--md-sys-color-outline);
+    color: var(--md-sys-color-on-surface-variant);
+
+    font-family: var(--font-family);
+    font-size: 0.875rem;
+    font-weight: 500;
+    cursor: pointer;
+    user-select: none;
+    transition: all 0.2s cubic-bezier(0.2, 0, 0, 1);
+}
+
+.filter-chip:hover {
+    background-color: var(--md-sys-color-surface-container-highest);
+}
+
+/* Активное состояние (Selected) */
+.filter-chip.active {
+    background-color: var(--md-sys-color-secondary-container);
+    color: var(--md-sys-color-on-secondary-container);
+    border-color: transparent;
+}
+
+/* Иконка галочки (появляется только при active, если нужно,
+   но здесь мы просто красим иконку статуса) */
+.filter-chip .material-symbols-rounded {
+    font-size: 18px;
+}
+
+.filter-chip input {
+    display: none;
+}
+
+/* --- Background FX (Optional but consistent) --- */
+.picker-background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    filter: blur(60px) brightness(0.3); /* Сильнее блюр, темнее фон */
+    z-index: 0;
+    opacity: 0;
+    transition: opacity 1s ease;
+}
+.picker-background.active {
+    opacity: 1;
+}
+
+/* --- Main Card (Poster Style) --- */
+.roulette-stage {
+    flex-grow: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    margin-bottom: 2rem;
+}
+
+.game-poster-card {
+    position: relative;
+    width: 300px;
+    aspect-ratio: 2/3;
+
+    background-color: var(--md-sys-color-surface-container);
+    border-radius: 24px; /* Совпадает с .game-card */
+    overflow: hidden;
+
+    /* Легкая тень, как у карточек в библиотеке */
+    box-shadow: 0 4px 8px 3px rgba(0, 0, 0, 0.15),
+                0 1px 3px rgba(0, 0, 0, 0.3);
+
+    transition: transform 0.2s ease;
+    border: 1px solid transparent;
+}
+
+/* Пустое состояние */
+.poster-placeholder {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: var(--md-sys-color-on-surface-variant);
+    gap: 16px;
+    opacity: 0.6;
+}
+.poster-placeholder .material-symbols-rounded {
+    font-size: 64px;
+}
+
+/* Контент результата */
+.poster-content {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+}
+
+.poster-content.hidden {
+    display: none;
+}
+
+.poster-image {
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+
+.poster-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Градиент снизу для читаемости текста */
+.poster-gradient {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 60%;
+    background: linear-gradient(to top, rgba(0,0,0,0.9), transparent);
+    pointer-events: none;
+}
+
+.poster-info {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    padding: 24px;
+    box-sizing: border-box;
+    z-index: 2;
+}
+
+/* Типографика карточки */
+.franchise-label {
+    display: block;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    font-weight: 700;
+    color: var(--md-sys-color-tertiary); /* Акцентный цвет для надписи */
+    margin-bottom: 4px;
+}
+
+.game-title {
+    margin: 0 0 12px 0;
+    font-size: 1.5rem;
+    line-height: 1.2;
+    font-weight: 600;
+    color: white; /* Всегда белый на темном градиенте */
+
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.poster-meta {
+    display: flex;
+    gap: 8px;
+}
+
+.meta-badge {
+    font-size: 0.75rem;
+    padding: 4px 8px;
+    border-radius: 6px;
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(4px);
+    color: rgba(255, 255, 255, 0.9);
+    font-weight: 500;
+}
+
+/* Анимация тряски при ролле */
+.game-poster-card.shuffling {
+    animation: simple-shake 0.1s infinite;
+}
+
+@keyframes simple-shake {
+    0% { transform: rotate(0deg); }
+    25% { transform: rotate(1deg); }
+    75% { transform: rotate(-1deg); }
+}
+
+/* Эффект победы - просто легкое увеличение */
+.game-poster-card.winner {
+    transform: scale(1.02);
+    border-color: var(--md-sys-color-outline);
+}
+
+/* --- Кнопка (FAB Extended) --- */
+.actions-area {
+    display: flex;
+    justify-content: center;
+}
+
+.roll-btn {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    height: 56px;
+    padding: 0 24px;
+    border-radius: 16px; /* FAB shape */
+
+    background-color: var(--md-sys-color-primary-container);
+    color: var(--md-sys-color-on-primary-container);
+
+    border: none;
+    font-size: 1rem;
+    font-weight: 500;
+    font-family: var(--font-family);
+    cursor: pointer;
+
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    transition: all 0.2s ease;
+}
+
+.roll-btn:hover {
+    box-shadow: 0 6px 12px rgba(0,0,0,0.3);
+    filter: brightness(1.05); /* Легкое осветление вместо скейла */
+}
+
+.roll-btn:active {
+    transform: translateY(1px);
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+
+.roll-btn:disabled {
+    background-color: var(--md-sys-color-surface-container-highest);
+    color: var(--md-sys-color-on-surface);
+    opacity: 0.5;
+    cursor: not-allowed;
+    box-shadow: none;
+}
+
+@media (max-width: 768px) {
+    .picker-container {
+        /* 1. Отступ снизу, чтобы контент не залез под плавающее меню навигации */
+        padding-bottom: 110px;
+        padding-top: 16px;
+
+        /* 2. Используем dvh (dynamic viewport height), чтобы адресная строка
+              мобильного браузера не ломала верстку */
+        min-height: 100dvh;
+
+        /* Центрируем контент */
+        justify-content: center;
+        gap: 1.5rem;
+    }
+
+    .picker-header h1 {
+        font-size: 2rem; /* Уменьшаем заголовок */
+    }
+
+    /* Уменьшаем карточку под узкие экраны */
+    .game-poster-card {
+        width: 70vw;       /* 70% ширины экрана */
+        max-width: 280px;  /* Но не больше 280px */
+        aspect-ratio: 2/3;
+
+        /* Убираем сильные тени для производительности */
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+    }
+
+    /* Адаптация контента внутри карточки */
+    .game-title {
+        font-size: 1.25rem; /* Название игры поменьше */
+        line-height: 1.2;
+        margin-bottom: 8px;
+        -webkit-line-clamp: 2; /* Максимум 2 строки названия на мобиле */
+    }
+
+    .poster-info {
+        padding: 16px; /* Меньше отступы внутри */
+    }
+
+    .poster-placeholder .material-symbols-rounded {
+        font-size: 48px; /* Иконка заглушки меньше */
+    }
+
+    .poster-placeholder .headline-small {
+        font-size: 1.1rem;
+    }
+
+    /* Компактная кнопка */
+    .roll-btn {
+        height: 48px;
+        padding: 0 32px;
+        font-size: 0.9rem;
+        border-radius: 24px;
+
+        /* Поднимаем кнопку чуть выше, чтобы её было удобно нажимать большим пальцем */
+        margin-bottom: 16px;
+    }
+
+    /* Бэйджи жанров */
+    .meta-badge {
+        font-size: 0.65rem;
+        padding: 2px 6px;
+    }
+}
