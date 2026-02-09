@@ -2,6 +2,10 @@ import os
 import json
 from flask import Flask, render_template, request, jsonify
 
+from collections import Counter
+import statistics
+from datetime import datetime
+
 app = Flask(__name__)
 
 DATA_FILE = os.path.join(os.path.dirname(__file__), 'data', 'games_data.json')
@@ -277,6 +281,155 @@ def add_franchise():
     except Exception as e:
         print(f"Error adding franchise: {e}")
         return jsonify({'success': False, 'error': str(e)}), 500
+
+@app.route('/dashboard')
+def dashboard():
+    data = load_library()
+
+    # 1. Собираем все игры в плоский список
+    all_games = []
+    # Игры из франшиз
+    for f_name, f_data in data.get('franchises', {}).items():
+        for game in f_data.get('games', []):
+            game_copy = game.copy()
+            game_copy['franchise_name'] = f_name
+            all_games.append(game_copy)
+    # Одиночные игры
+    for game in data.get('singles', []):
+        game_copy = game.copy()
+        game_copy['franchise_name'] = None
+        all_games.append(game_copy)
+
+    total_games = len(all_games)
+
+    # Если библиотека пуста, отдаем пустой контекст
+    if total_games == 0:
+        return render_template('dashboard.html', analytics=None)
+
+    # --- 2. ПРОГРЕСС (Progress & Status) ---
+    status_counts = Counter(g.get('status', 'not_started') for g in all_games)
+
+    completed = status_counts['completed']
+    dropped = status_counts['dropped']
+    playing = status_counts['playing']
+    backlog = status_counts['not_started'] + status_counts['on_hold']
+
+    completion_rate = round((completed / total_games * 100)) if total_games else 0
+    drop_rate = round((dropped / total_games * 100)) if total_games else 0
+
+    # --- 3. КАЧЕСТВО (Quality & Ratings) ---
+    rated_games = [g for g in all_games if g.get('rating', 0) > 0]
+    ratings = [float(g['rating']) for g in rated_games]
+
+    avg_score = round(statistics.mean(ratings), 1) if ratings else 0.0
+    masterpieces = len([r for r in ratings if r >= 9.5])
+    disappointments = len([r for r in ratings if r < 5.0])
+
+    # Гистограмма распределения (1..10)
+    rating_dist = {i: 0 for i in range(1, 11)}
+    for r in ratings:
+        bucket = int(round(r))
+        if bucket < 1: bucket = 1
+        if bucket > 10: bucket = 10
+        rating_dist[bucket] += 1
+
+    # Нормализация для CSS-графика (находим макс. значение, чтобы считать %)
+    max_dist_count = max(rating_dist.values()) if rating_dist else 0
+
+    # --- 4. ПРЕДПОЧТЕНИЯ (Preferences) ---
+    platforms = [g.get('platform', 'Unknown') for g in all_games]
+    genres = [g.get('genre', 'Unknown') for g in all_games]
+
+    top_platform = Counter(platforms).most_common(1)
+    top_genre = Counter(genres).most_common(1)
+
+    # Эффективность платформ (Средний рейтинг)
+    plat_ratings = {}
+    for g in rated_games:
+        p = g.get('platform', 'Unknown')
+        if p not in plat_ratings: plat_ratings[p] = []
+        plat_ratings[p].append(g['rating'])
+
+    platform_efficiency = []
+    for p, scores in plat_ratings.items():
+        if len(scores) >= 2:  # Считаем только если есть хотя бы 2 оценки
+            platform_efficiency.append({
+                'name': p,
+                'avg': round(statistics.mean(scores), 1),
+                'count': len(scores)
+            })
+    platform_efficiency.sort(key=lambda x: x['avg'], reverse=True)
+
+    # --- 5. ВРЕМЯ (Time Analysis) ---
+    # Парсим даты
+    dated_games = []
+    for g in all_games:
+        if g.get('date_added'):
+            try:
+                dt = datetime.strptime(g['date_added'], '%Y-%m-%d')
+                dated_games.append({'game': g, 'date': dt})
+            except:
+                pass
+
+    # Пиковый год
+    years = [d['date'].year for d in dated_games]
+    peak_year = Counter(years).most_common(1)
+
+    # Старейший бэклог
+    backlog_items = [d for d in dated_games if d['game']['status'] in ['not_started', 'on_hold']]
+    backlog_items.sort(key=lambda x: x['date'])
+    oldest_backlog = backlog_items[0]['game'] if backlog_items else None
+
+    # --- 6. ФРАНШИЗЫ ---
+    franchise_stats = []
+    for f_name, f_data in data.get('franchises', {}).items():
+        f_games = f_data.get('games', [])
+        f_total_planned = f_data.get('total_count', len(f_games))
+
+        f_ratings = [g['rating'] for g in f_games if g.get('rating', 0) > 0]
+        f_avg = round(statistics.mean(f_ratings), 1) if f_ratings else 0
+
+        # Считаем завершенные
+        f_comp_count = len([g for g in f_games if g.get('status') == 'completed'])
+        is_completed = (f_comp_count >= f_total_planned) and (f_total_planned > 0)
+
+        franchise_stats.append({
+            'name': f_name,
+            'total_count': f_total_planned,
+            'avg_rating': f_avg,
+            'is_completed': is_completed
+        })
+
+    longest_franchise = max(franchise_stats, key=lambda x: x['total_count']) if franchise_stats else None
+    best_franchise = max(franchise_stats, key=lambda x: x['avg_rating']) if franchise_stats else None
+    completed_series_count = len([f for f in franchise_stats if f['is_completed']])
+
+    analytics = {
+        'total': total_games,
+        'completion_rate': completion_rate,
+        'drop_rate': drop_rate,
+        'playing_count': playing,
+        'backlog_count': backlog,
+
+        'avg_score': avg_score,
+        'masterpieces': masterpieces,
+        'disappointments': disappointments,
+        'rating_dist': rating_dist,
+        'max_dist_count': max_dist_count,
+
+        'top_platform': top_platform[0][0] if top_platform else "N/A",
+        'top_genre': top_genre[0][0] if top_genre else "N/A",
+        'platform_efficiency': platform_efficiency[:3],
+
+        'peak_year': peak_year[0][0] if peak_year else "N/A",
+        'oldest_backlog': oldest_backlog,
+
+        'longest_franchise': longest_franchise,
+        'best_franchise': best_franchise,
+        'completed_series_count': completed_series_count
+    }
+
+    return render_template('dashboard.html', analytics=analytics)
 
 
 if __name__ == '__main__':

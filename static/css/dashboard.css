@@ -1,0 +1,134 @@
+/* Layout & Grid */
+.dashboard-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding-bottom: 80px;
+}
+
+.dashboard-header {
+    margin-bottom: 40px;
+}
+
+.subtitle {
+    color: var(--md-sys-color-on-surface-variant);
+    font-size: 16px;
+    margin-top: 8px;
+}
+
+.section-title {
+    font-size: 20px;
+    color: var(--md-sys-color-on-surface);
+    margin: 48px 0 24px 0;
+    font-weight: 500;
+}
+
+.bento-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 24px;
+}
+
+/* --- Hero Stat Cards (Top Row) --- */
+.stat-card {
+    border-radius: 28px;
+    padding: 24px;
+    height: 160px;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    transition: transform 0.2s var(--motion-spring-bouncy);
+}
+.stat-card:hover { transform: translateY(-4px); }
+
+.stat-card.primary { background: var(--md-sys-color-primary-container); color: var(--md-sys-color-on-primary-container); }
+.stat-card.secondary { background: var(--md-sys-color-secondary); color: #1d1b24; }
+.stat-card.tertiary { background: var(--md-sys-color-tertiary); color: #31111d; }
+
+.stat-value { font-size: 56px; font-weight: 300; line-height: 1; font-family: 'Roboto Flex'; }
+.stat-label { font-size: 14px; font-weight: 500; text-transform: uppercase; letter-spacing: 0.5px; opacity: 0.8; margin-top: 8px; display: block; }
+.stat-icon { font-size: 64px; position: absolute; bottom: -10px; right: -10px; opacity: 0.15; transform: rotate(-10deg); }
+
+/* SVG Progress Circle */
+.progress-circle { width: 64px; height: 64px; }
+.progress-circle svg { transform: rotate(-90deg); width: 100%; height: 100%; }
+.circle-bg { fill: none; stroke: rgba(0,0,0,0.1); stroke-width: 4; }
+.circle-fill { fill: none; stroke: currentColor; stroke-width: 4; stroke-linecap: round; }
+
+/* --- Info Cards (Bento Boxes) --- */
+.info-card {
+    background-color: var(--md-sys-color-surface-container);
+    border-radius: 24px;
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: 160px;
+}
+
+.wide-card { grid-column: span 2; }
+@media (max-width: 768px) { .wide-card { grid-column: span 1; } }
+
+.card-header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--md-sys-color-on-surface-variant);
+    text-transform: uppercase;
+    margin-bottom: 12px;
+}
+
+.card-big-value { font-size: 42px; font-weight: 400; color: var(--md-sys-color-on-surface); font-family: 'Roboto Flex'; }
+.card-medium-value { font-size: 28px; font-weight: 500; color: var(--md-sys-color-on-surface); margin-bottom: 4px; }
+.card-sub { font-size: 14px; color: var(--md-sys-color-on-surface-variant); }
+
+/* Variants */
+.variant-error { background: var(--md-sys-color-error-container); }
+.variant-error .card-big-value, .variant-error .card-header { color: var(--md-sys-color-on-error-container); }
+
+.variant-surface { background: var(--md-sys-color-surface-container-high); }
+
+/* --- Histogram --- */
+.histogram-container {
+    display: flex;
+    align-items: flex-end;
+    gap: 4px;
+    height: 100px;
+    margin-top: auto;
+}
+.hist-column { flex: 1; display: flex; flex-direction: column; align-items: center; }
+.hist-bar {
+    width: 100%;
+    background: var(--md-sys-color-primary);
+    border-radius: 4px 4px 0 0;
+    opacity: 0.7;
+    transition: height 0.5s ease;
+    min-height: 2px;
+}
+.hist-bar:hover { opacity: 1; }
+.hist-label { font-size: 10px; margin-top: 4px; color: var(--md-sys-color-on-surface-variant); }
+
+/* --- Efficiency List --- */
+.efficiency-list { margin-top: 12px; display: flex; flex-direction: column; gap: 8px; }
+.eff-item { display: flex; justify-content: space-between; align-items: center; font-size: 14px; }
+.eff-val {
+    background: var(--md-sys-color-surface-container-highest);
+    padding: 2px 8px;
+    border-radius: 6px;
+    font-weight: 700;
+    font-size: 12px;
+}
+
+/* --- Oldest Backlog Preview --- */
+.oldest-game-flex { display: flex; gap: 16px; margin-top: 12px; }
+.oldest-thumb { width: 80px; height: 80px; object-fit: cover; border-radius: 12px; }
+.oldest-info { display: flex; flex-direction: column; justify-content: center; }
+.oldest-title { font-weight: 600; font-size: 16px; margin-bottom: 4px; }
+.oldest-date { font-size: 12px; color: var(--md-sys-color-on-surface-variant); }
+.chip-status {
+    background: var(--md-sys-color-surface-container-highest);
+    font-size: 11px; padding: 4px 8px; border-radius: 8px; width: fit-content; margin-top: 6px;
+}

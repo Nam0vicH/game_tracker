@@ -76,6 +76,12 @@
                     <span class="label">Stats</span>
                 </a>
 
+                <a href="{{ url_for('dashboard') }}"
+                   class="nav-item {{ 'active' if request.path == '/dashboard' }}">
+                    <span class="material-symbols-rounded icon">monitoring</span>
+                    <span class="label">Dashboard</span>
+                </a>
+
                 <a href="{{ url_for('picker') }}"
                    class="nav-item {{ 'active' if request.endpoint == 'picker' else '' }}">
                     <span class="material-symbols-rounded icon">casino</span>

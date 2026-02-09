@@ -1,0 +1,191 @@
+{% extends "base.html" %}
+
+{% block page_css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/dashboard.css') }}">
+{% endblock %}
+
+{% block content %}
+<div class="dashboard-container fade-in">
+
+    <header class="dashboard-header">
+        <h1 class="display-medium">Analytics Dashboard</h1>
+        <p class="subtitle">Deep dive into your gaming habits</p>
+    </header>
+
+    {% if analytics %}
+
+    <!-- SECTION 1: MAIN METRICS (Hero Row) -->
+    <div class="bento-grid hero-row">
+        <!-- Backlog -->
+        <div class="stat-card primary">
+            <div class="stat-content">
+                <span class="stat-value">{{ analytics.backlog_count }}</span>
+                <span class="stat-label">Backlog Size</span>
+            </div>
+            <span class="material-symbols-rounded stat-icon">layers</span>
+        </div>
+
+        <!-- Completion Rate -->
+        <div class="stat-card secondary">
+            <div class="stat-content">
+                <span class="stat-value">{{ analytics.completion_rate }}%</span>
+                <span class="stat-label">Completion Rate</span>
+            </div>
+            <!-- SVG Circle Chart -->
+            <div class="progress-circle">
+                <svg viewBox="0 0 36 36">
+                    <path class="circle-bg" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
+                    <path class="circle-fill" stroke-dasharray="{{ analytics.completion_rate }}, 100" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
+                </svg>
+            </div>
+        </div>
+
+        <!-- Currently Playing -->
+        <div class="stat-card tertiary">
+            <div class="stat-content">
+                <span class="stat-value">{{ analytics.playing_count }}</span>
+                <span class="stat-label">Active Games</span>
+            </div>
+            <span class="material-symbols-rounded stat-icon">sports_esports</span>
+        </div>
+    </div>
+
+    <!-- SECTION 2: QUALITY & RATINGS -->
+    <h3 class="section-title">Quality Control</h3>
+    <div class="bento-grid">
+        <!-- Avg Score -->
+        <div class="info-card">
+            <div class="card-header">
+                <span class="material-symbols-rounded">star_half</span>
+                Average Score
+            </div>
+            <div class="card-big-value">{{ analytics.avg_score }}</div>
+            <div class="card-sub">Out of 10.0</div>
+        </div>
+
+        <!-- Masterpieces -->
+        <div class="info-card">
+            <div class="card-header">
+                <span class="material-symbols-rounded">diamond</span>
+                Masterpieces
+            </div>
+            <div class="card-big-value">{{ analytics.masterpieces }}</div>
+            <div class="card-sub">Games rated 9.5+</div>
+        </div>
+
+        <!-- Disappointments -->
+        <div class="info-card variant-error">
+            <div class="card-header">
+                <span class="material-symbols-rounded">thumb_down</span>
+                Disappointments
+            </div>
+            <div class="card-big-value">{{ analytics.disappointments }}</div>
+            <div class="card-sub">Rated below 5.0</div>
+        </div>
+
+        <!-- Rating Histogram (Wide) -->
+        <div class="info-card wide-card">
+            <div class="card-header">
+                <span class="material-symbols-rounded">bar_chart</span>
+                Rating Distribution
+            </div>
+            <div class="histogram-container">
+                {% for r in range(1, 11) %}
+                    {% set count = analytics.rating_dist[r] %}
+                    {% set height = (count / analytics.max_dist_count * 100) if analytics.max_dist_count > 0 else 0 %}
+                    <div class="hist-column">
+                        <div class="hist-bar" style="height: {{ height }}%;" title="{{ count }} games"></div>
+                        <span class="hist-label">{{ r }}</span>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+
+    <!-- SECTION 3: INSIGHTS & TIME -->
+    <h3 class="section-title">Insights</h3>
+    <div class="bento-grid">
+        <!-- Top Platform & Efficiency -->
+        <div class="info-card tall-card">
+            <div class="card-header">
+                <span class="material-symbols-rounded">gamepad</span>
+                Top Platform
+            </div>
+            <div class="card-big-value">{{ analytics.top_platform }}</div>
+
+            <div class="efficiency-block">
+                <div class="card-sub">Most Efficient (Avg Rating)</div>
+                <div class="efficiency-list">
+                    {% for p in analytics.platform_efficiency %}
+                    <div class="eff-item">
+                        <span class="eff-name">{{ p.name }}</span>
+                        <span class="eff-val">{{ p.avg }}</span>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+
+        <!-- Peak Year -->
+        <div class="info-card">
+            <div class="card-header">
+                <span class="material-symbols-rounded">calendar_month</span>
+                Peak Collecting Year
+            </div>
+            <div class="card-big-value">{{ analytics.peak_year }}</div>
+        </div>
+
+        <!-- Oldest Backlog -->
+        <div class="info-card wide-card variant-surface">
+            <div class="card-header">
+                <span class="material-symbols-rounded">history</span>
+                Oldest in Backlog
+            </div>
+            {% if analytics.oldest_backlog %}
+            <div class="oldest-game-flex">
+                <img src="{{ analytics.oldest_backlog.thumbnail }}" class="oldest-thumb" loading="lazy">
+                <div class="oldest-info">
+                    <div class="oldest-title">{{ analytics.oldest_backlog.title }}</div>
+                    <div class="oldest-date">Added: {{ analytics.oldest_backlog.date_added }}</div>
+                    <span class="chip-status">Waiting since {{ analytics.oldest_backlog.date_added[:4] }}</span>
+                </div>
+            </div>
+            {% else %}
+            <div class="card-sub">No backlog! You are clean.</div>
+            {% endif %}
+        </div>
+    </div>
+
+    <!-- SECTION 4: FRANCHISE HALL OF FAME -->
+    <h3 class="section-title">Franchise Hall of Fame</h3>
+    <div class="bento-grid">
+        {% if analytics.longest_franchise %}
+        <div class="info-card">
+            <div class="card-header">Longest Series</div>
+            <div class="card-medium-value">{{ analytics.longest_franchise.name }}</div>
+            <div class="card-sub">{{ analytics.longest_franchise.total_count }} titles</div>
+        </div>
+        {% endif %}
+
+        {% if analytics.best_franchise %}
+        <div class="info-card">
+            <div class="card-header">Highest Rated</div>
+            <div class="card-medium-value">{{ analytics.best_franchise.name }}</div>
+            <div class="card-sub">Avg {{ analytics.best_franchise.avg_rating }}</div>
+        </div>
+        {% endif %}
+
+        <div class="info-card">
+            <div class="card-header">Completed Series</div>
+            <div class="card-medium-value">{{ analytics.completed_series_count }}</div>
+            <div class="card-sub">100% finished</div>
+        </div>
+    </div>
+
+    {% else %}
+    <div class="empty-state">
+        <p>No games in library yet. Add some to see stats!</p>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}

@@ -10,43 +10,6 @@
         <p class="body-large text-variant">Следите за своим прогрессом в легендарных сагах</p>
     </header>
 
-    <!-- 1. DASHBOARD HERO SECTION -->
-    <div class="dashboard-grid">
-        <!-- Card 1: Active Franchises -->
-        <div class="stat-card primary">
-            <div class="stat-content">
-                <span class="stat-value">{{ data.franchises|length }}</span>
-                <span class="stat-label">Active Franchises</span>
-            </div>
-            <span class="material-symbols-rounded stat-icon">library_books</span>
-        </div>
-
-        <!-- Card 2: Total Games -->
-        <div class="stat-card secondary">
-            <div class="stat-content">
-                <span class="stat-value">{{ stats.total }}</span>
-                <span class="stat-label">Total Games Collected</span>
-            </div>
-            <span class="material-symbols-rounded stat-icon">sports_esports</span>
-        </div>
-
-        <!-- Card 3: Completion Rate -->
-        {% set completion_rate = (stats.completed / stats.total * 100)|round|int if stats.total > 0 else 0 %}
-        <div class="stat-card tertiary">
-            <div class="stat-content">
-                <span class="stat-value">{{ completion_rate }}%</span>
-                <span class="stat-label">Completion Rate</span>
-            </div>
-            <!-- Simple SVG Progress Circle -->
-            <div class="progress-circle" style="--progress: {{ completion_rate }}">
-                <svg viewBox="0 0 36 36">
-                    <path class="circle-bg" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
-                    <path class="circle-fill" stroke-dasharray="{{ completion_rate }}, 100" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
-                </svg>
-            </div>
-        </div>
-    </div>
-
     <!-- 2. FRANCHISE RAILS (Horizontal Scrolling) -->
     <div class="rails-layout">
         {% for franchise, f_data in data.franchises.items() %}
