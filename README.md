@@ -1,4 +1,3 @@
-```markdown
 <div align="center">
 
 # Game Tracker
@@ -67,7 +66,7 @@ game_tracker/
     ├── library.html        # Главная страница (библиотека)
     ├── journey.html        # Страница статистики
     └── settings.html       # Настройки внешнего вида
-```
+
 
 ## Установка и запуск
 
